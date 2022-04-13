@@ -5,7 +5,7 @@ namespace EmployeeManagementSystem.EmployeeLeaveModel
     public interface IEmployeeLeave
     {
         public List<EmpLeaveDTO> GetAllEmpLeave();
-        public List<EmpLeaveDTO> GetEmpLeave(int id);
+        public EmpLeaveDTO GetEmpLeave(int id);
         public void Insert(EmpLeaveDTO empLeave);
         public void Update(EmpLeaveDTO empLeave);
         public void Delete(EmpLeaveDTO empLeave);

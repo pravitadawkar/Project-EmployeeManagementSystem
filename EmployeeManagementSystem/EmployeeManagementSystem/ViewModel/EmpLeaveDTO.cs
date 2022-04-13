@@ -5,6 +5,8 @@ namespace EmployeeManagementSystem.ViewModel
     public class EmpLeaveDTO
     {
         public int EmpLeaveId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int EmployeeId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

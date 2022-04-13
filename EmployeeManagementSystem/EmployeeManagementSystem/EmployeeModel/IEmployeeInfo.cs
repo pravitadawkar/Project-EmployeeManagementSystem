@@ -12,7 +12,7 @@ namespace EmployeeManagementSystem.EmployeeModel
         public EmployeeDTO GetEmployee(int id);
         public void Insert(EmployeeDTO employeeInfo);
         public void Update(EmployeeDTO employeeInfo);
-        public void Delete(EmployeeDTO employeeInfo);
+        public void Delete(int id);
 
     }
 }

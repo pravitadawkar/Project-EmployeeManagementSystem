@@ -9,6 +9,6 @@ namespace EmployeeManagementSystem.DepartmentModel
         public string CreatedBY { get; set; }
         public bool IsActive { get; set; }
         //public int EmployeeId { get; set; }
-        public virtual EmployeeInfo Employeeinfo { get; set; }
+        //public virtual EmployeeInfo Employeeinfo { get; set; }
     }
 }

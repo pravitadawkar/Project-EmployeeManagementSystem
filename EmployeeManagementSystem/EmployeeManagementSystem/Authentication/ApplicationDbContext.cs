@@ -26,10 +26,10 @@ namespace EmployeeManagementSystem.Authentication
            .WithOne(el => el.Employeeinfo)
            .HasForeignKey<EmployeeLeave>(e => e.EmployeeId);
 
-            builder.Entity<Department>()
-                .HasOne<EmployeeInfo>(e => e.Employeeinfo)
-                .WithOne(d => d.Department)
-               .HasForeignKey<EmployeeInfo>(d => d.DepartmentId);
+            //builder.Entity<Department>()
+            //    .HasOne<EmployeeInfo>(e => e.Employeeinfo)
+            //    .WithOne(d => d.Department)
+            //   .HasForeignKey<EmployeeInfo>(d => d.DepartmentId);
 
             //builder.Entity<EmployeeInfo>()
             //    .HasMany<Project>(e => e.Project)

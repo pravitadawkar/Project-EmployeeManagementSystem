@@ -9,11 +9,11 @@ namespace EmployeeManagementSystem.ViewModel
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string Address { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string Degree { get; set; }
-        public DateTime JoiningDate { get; set; }
-        public int DepartmentId { get; set; }
-        public string Departmentname { get; set; }
+        public string JoiningDate { get; set; }
+        //public int DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

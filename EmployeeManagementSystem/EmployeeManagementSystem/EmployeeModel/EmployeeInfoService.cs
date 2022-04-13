@@ -28,7 +28,7 @@ namespace EmployeeManagementSystem.EmployeeModel
                              Gender = e.Gender,
                              Degree = e.Degree,
                              JoiningDate = e.JoiningDate,
-                             DepartmentId=e.DepartmentId
+                             DepartmentName=e.DepartmentName
                          }).ToList();
             return reslt;
 
@@ -47,7 +47,7 @@ namespace EmployeeManagementSystem.EmployeeModel
                              Gender = e.Gender,
                              Degree = e.Degree,
                              JoiningDate = e.JoiningDate,
-                             DepartmentId=e.DepartmentId
+                             DepartmentName = e.DepartmentName
                          }).FirstOrDefault();
             return reslt;
         }
@@ -62,7 +62,7 @@ namespace EmployeeManagementSystem.EmployeeModel
             employeeinfo.Gender = employeeInfo.Gender;
             employeeinfo.Degree = employeeInfo.Degree;
             employeeinfo.JoiningDate = employeeInfo.JoiningDate;
-            employeeinfo.DepartmentId = employeeInfo.DepartmentId;
+            employeeinfo.DepartmentName = employeeInfo.DepartmentName;
             _context.Add(employeeinfo);
             _context.SaveChanges();
         }
@@ -77,24 +77,19 @@ namespace EmployeeManagementSystem.EmployeeModel
             employeeinfo.Gender = employeeInfo.Gender;
             employeeinfo.Degree = employeeInfo.Degree;
             employeeinfo.JoiningDate = employeeInfo.JoiningDate;
-            employeeinfo.DepartmentId = employeeInfo.DepartmentId;
+            employeeinfo.DepartmentName = employeeInfo.DepartmentName;
             _context.Update(employeeinfo);
             _context.SaveChanges();
         }
-        public void Delete(EmployeeDTO employeeInfo)
+        public void Delete(int id)
         {
-            EmployeeInfo employeeinfo = new EmployeeInfo();
-            employeeinfo.Id = employeeInfo.Id;
-            employeeinfo.FirstName = employeeInfo.FirstName;
-            employeeinfo.LastName = employeeInfo.LastName;
-            employeeinfo.EmailAddress = employeeInfo.EmailAddress;
-            employeeinfo.Address = employeeInfo.Address;
-            employeeinfo.Gender = employeeInfo.Gender;
-            employeeinfo.Degree = employeeInfo.Degree;
-            employeeinfo.JoiningDate = employeeInfo.JoiningDate;
-            employeeinfo.DepartmentId = employeeInfo.DepartmentId;
-            _context.Remove(employeeinfo);
-            _context.SaveChanges();
+            var employee = _context.EmployeeInfos.Where(e => e.Id == id).FirstOrDefault();
+
+            if (employee != null)
+            {
+                _context.Remove(employee);
+                _context.SaveChanges();
+            }
         }
     }
 }

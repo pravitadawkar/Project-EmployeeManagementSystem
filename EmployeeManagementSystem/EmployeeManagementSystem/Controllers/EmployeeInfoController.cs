@@ -50,9 +50,9 @@ namespace EmployeeManagementSystem.Controllers
         }
         [HttpPost]
         [Route("DeleteEmployeeInfo")]
-        public IActionResult DeleteEmployeeInfo(EmployeeDTO employeeInfo)
+        public IActionResult DeleteEmployeeInfo(int id)
         {
-            _data.Delete(employeeInfo);
+            _data.Delete(id);
             return Ok();
         }
     }

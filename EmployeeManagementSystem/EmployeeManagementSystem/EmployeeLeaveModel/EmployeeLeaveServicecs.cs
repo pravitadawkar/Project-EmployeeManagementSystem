@@ -15,11 +15,13 @@ namespace EmployeeManagementSystem.EmployeeLeaveModel
         }
         public List<EmpLeaveDTO> GetAllEmpLeave()
         {
-            var result = (from
-                           el in _context.EmployeeLeaves
+            var result = (from e in _context.EmployeeInfos
+                          join el in _context.EmployeeLeaves on e.Id equals el.EmployeeId
                           select new EmpLeaveDTO
                           {
                               EmployeeId = el.EmployeeId,
+                              FirstName=e.FirstName,
+                              LastName=e.LastName,
                               StartDate = el.StartDate,
                               EndDate = el.EndDate,
                               Reason = el.Reason,
@@ -28,18 +30,23 @@ namespace EmployeeManagementSystem.EmployeeLeaveModel
             return result;
 
         }
-        public List<EmpLeaveDTO> GetEmpLeave(int Employeeid)
+        public EmpLeaveDTO GetEmpLeave(int Employeeid)
         {
-            var result = _context.EmployeeLeaves.Where(e => e.EmployeeId == Employeeid).Select(e => new EmpLeaveDTO()
-            {
-               
-                EmployeeId = e.EmployeeId,
-                EndDate = e.EndDate,
-                StartDate = e.StartDate,
-                Reason = e.Reason,
-                Status = e.Status,
-            }).ToList();
+            var result = (from e in _context.EmployeeInfos
+                          join el in _context.EmployeeLeaves on e.Id equals el.EmployeeId
+                          where e.Id==Employeeid
+                          select new EmpLeaveDTO
+                          {
+                              EmployeeId = el.EmployeeId,
+                              FirstName = e.FirstName,
+                              LastName = e.LastName,
+                              StartDate = el.StartDate,
+                              EndDate = el.EndDate,
+                              Reason = el.Reason,
+                              Status = el.Status,
+                          }).FirstOrDefault();
             return result;
+
         }
         public void Insert(EmpLeaveDTO empLeave)
         {
@@ -54,6 +61,12 @@ namespace EmployeeManagementSystem.EmployeeLeaveModel
                 employeeLeave.EmployeeId = empLeave.EmployeeId;
                 _context.Add(employeeLeave);
                 _context.SaveChanges();
+
+                EmployeeInfo employee = new EmployeeInfo();
+                employee.FirstName = empLeave.FirstName;
+                employee.LastName = empLeave.LastName;
+                _context.Add(employee);
+                _context.SaveChanges();
             }
         }
         public void Update(EmpLeaveDTO empLeave)
@@ -67,6 +80,12 @@ namespace EmployeeManagementSystem.EmployeeLeaveModel
             employeeLeave.EmployeeId = empLeave.EmployeeId;
             _context.Update(employeeLeave);
             _context.SaveChanges();
+
+            EmployeeInfo employee = new EmployeeInfo();
+            employee.FirstName = empLeave.FirstName;
+            employee.LastName = empLeave.LastName;
+            _context.Update(employee);
+            _context.SaveChanges();
         }
         public void Delete(EmpLeaveDTO empLeave)
         {
@@ -78,6 +97,12 @@ namespace EmployeeManagementSystem.EmployeeLeaveModel
             employeeLeave.Status = empLeave.Status;
             employeeLeave.EmployeeId = empLeave.EmployeeId;
             _context.Remove(employeeLeave);
+            _context.SaveChanges();
+
+            EmployeeInfo employee = new EmployeeInfo();
+            employee.FirstName = empLeave.FirstName;
+            employee.LastName = empLeave.LastName;
+            _context.Remove(employee);
             _context.SaveChanges();
         }
     }
