@@ -1,0 +1,23 @@
+<div style="display: block;max-width: 300px;margin: auto; margin-top: 40px; background-color: beige ;padding: 48px;border-radius: 16px;">
+    <h4 class="text-primary text-center">Login</h4>
+    <form  [formGroup]="loginForm">
+        <div>
+            <input  placeholder="username" formControlName="username" style="width: 100%;">
+        </div>
+        <span *ngIf="username && username.invalid && username.touched" style="color: red;">* This field is Requered</span>
+        <br>
+        <div>
+        <input  placeholder="password" formControlName="password" type="password" style="width: 100%;">
+    </div>
+    <span *ngIf="password && password.invalid && password.touched" style="color: red;">* This field is Requered</span>
+        <br>
+        <button mat-raised-button class="btn-primary" (click)="loginform()"  [disabled]="!loginForm.valid" type="submit" style="display: flex;justify-content: center;" >
+            Login
+        </button><br>
+        <!-- <span style="text-align: center;justify-content: center;" class="text-center">new to our plateform?
+            <a [routerLink]="['/signup']" class="text-center">
+            SignUp
+            </a>
+        </span> -->
+    </form>
+    </div>

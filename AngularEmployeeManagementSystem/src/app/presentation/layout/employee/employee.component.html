@@ -1,1 +1,39 @@
-<p>employee works!</p>
+<h4 class="container-fluid text-success mt-4 ">Employee List</h4>
+<button type="button" class="btn btn-secondary btn-sm" style="float: right; margin: 20px; margin-right: 40px; " [routerLink]="['/supplierdetail/addsupplier']">
+    Add Employee
+  </button>
+<table class="table      table-striped container-fluid mt-4">
+    <thead class="h6">
+    <tr>
+            <td>Id</td>
+            <td>FirstName</td>
+            <td>Lastname</td>
+            <td>Address</td>
+            <td>Email</td>
+            <td>DateOfBirth</td>
+            <td>Gender</td>
+            <td>Degree</td>
+            <td>JoiningDate</td>
+            <td>Department</td>
+            <td></td>
+            <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of listAllEmployee">
+        <td>{{item.id}}</td>
+        <td>{{item.firstName}}</td>
+        <td>{{item.lastName}}</td>
+        <td>{{item.emailAddress}}</td>
+        <td>{{item.address}}</td>
+        <td>{{item.dateOfBirth}}</td>
+        <td>{{item.gender}}</td>
+        <td>{{item.degree}}</td>
+        <td>{{item.joiningDate}}</td>
+        <td>{{item.departmentname}}</td>
+        <td><button>EDIT</button></td>
+        <td><button (click)="delete_employee(item.id)">DELETE</button></td>
+
+    </tr>       
+    </tbody>
+  </table>
