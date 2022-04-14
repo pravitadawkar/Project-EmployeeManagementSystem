@@ -1,5 +1,5 @@
 ﻿using System;
-using EmployeeManagementSystem.EmployeeModel;
+using EmployeeManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

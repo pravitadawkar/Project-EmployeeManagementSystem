@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmployeeManagementSystem.TimeSheetSegmentModel
+namespace EmployeeManagementSystem.Models
 {
     public class TimeSheet
     {

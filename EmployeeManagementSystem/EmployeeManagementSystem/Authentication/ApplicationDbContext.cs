@@ -1,7 +1,5 @@
-﻿using EmployeeManagementSystem.DepartmentModel;
-using EmployeeManagementSystem.EmployeeLeaveModel;
-using EmployeeManagementSystem.EmployeeModel;
-using EmployeeManagementSystem.ProjectModel;
+﻿//using EmployeeManagementSystem.DepartmentModel;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.TimeSheetSegmentModel;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -21,10 +19,10 @@ namespace EmployeeManagementSystem.Authentication
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<EmployeeInfo>()
-           .HasOne<EmployeeLeave>(e => e.Employeeleave)
-           .WithOne(el => el.Employeeinfo)
-           .HasForeignKey<EmployeeLeave>(e => e.EmployeeId);
+            builder.Entity<EmployeeLeave>()
+           .HasOne(el => el.Employeeinfo)
+           .WithMany(e => e.Employeeleave)
+           .HasForeignKey(el => el.EmployeeId);
 
             //builder.Entity<Department>()
             //    .HasOne<EmployeeInfo>(e => e.Employeeinfo)
@@ -44,7 +42,7 @@ namespace EmployeeManagementSystem.Authentication
         public DbSet<EmployeeInfo> EmployeeInfos { get; set; }
         public DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Department> Departments { get; set; }
+        //public DbSet<Department> Departments { get; set; }
         //public DbSet<TimeSheet> TimeSheets { get; set; }
     }
 }

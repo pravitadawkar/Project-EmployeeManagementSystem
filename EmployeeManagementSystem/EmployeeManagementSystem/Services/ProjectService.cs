@@ -1,10 +1,12 @@
 ﻿using EmployeeManagementSystem.ViewModel;
 using System.Collections.Generic;
-using EmployeeManagementSystem.EmployeeModel;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.Authentication;
 using System.Linq;
+using EmployeeManagementSystem.Interfaces;
 
-namespace EmployeeManagementSystem.ProjectModel
+
+namespace EmployeeManagementSystem.Services
 {
     public class ProjectService : IProject
     {

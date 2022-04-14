@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.Authentication;
+using EmployeeManagementSystem.Interfaces;
 using EmployeeManagementSystem.ViewModel;
+using EmployeeManagementSystem.Models;
 
-namespace EmployeeManagementSystem.EmployeeModel
+
+namespace EmployeeManagementSystem.Services
 {
     public class EmployeeInfoService : IEmployeeInfo
     {

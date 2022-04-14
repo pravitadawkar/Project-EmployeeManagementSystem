@@ -1,7 +1,7 @@
 ﻿using EmployeeManagementSystem.ViewModel;
 using System.Collections.Generic;
 
-namespace EmployeeManagementSystem.ProjectModel
+namespace EmployeeManagementSystem.Interfaces
 {
     public interface IProject
     {

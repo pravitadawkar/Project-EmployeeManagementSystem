@@ -1,8 +1,8 @@
 using EmployeeManagementSystem.Authentication;
-using EmployeeManagementSystem.DepartmentModel;
-using EmployeeManagementSystem.EmployeeLeaveModel;
-using EmployeeManagementSystem.EmployeeModel;
-using EmployeeManagementSystem.ProjectModel;
+//using EmployeeManagementSystem.DepartmentModel;
+using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Interfaces;
+using EmployeeManagementSystem.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,7 +48,7 @@ namespace EmployeeManagementSystem
             services.AddTransient<IEmployeeInfo, EmployeeInfoService>();
             services.AddTransient<IEmployeeLeave, EmployeeLeaveService>();
             services.AddTransient<IProject, ProjectService>();
-            services.AddTransient<IDepartment, DepartmentService>();
+            //services.AddTransient<IDepartment, DepartmentService>();
 
 
             services.AddControllers();

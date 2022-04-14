@@ -1,8 +1,8 @@
-﻿using EmployeeManagementSystem.EmployeeModel;
+﻿
 using System;
 using System.Collections.Generic;
 
-namespace EmployeeManagementSystem.ProjectModel
+namespace EmployeeManagementSystem.Models
 {
     public class Project
     {

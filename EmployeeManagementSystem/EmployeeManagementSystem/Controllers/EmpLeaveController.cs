@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using EmployeeManagementSystem.EmployeeLeaveModel;
+using EmployeeManagementSystem.Interfaces;
 using EmployeeManagementSystem.ViewModel;
 using System;
 

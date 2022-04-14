@@ -1,10 +1,12 @@
 ﻿using EmployeeManagementSystem.Authentication;
-using EmployeeManagementSystem.EmployeeModel;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
+using EmployeeManagementSystem.Interfaces;
 
-namespace EmployeeManagementSystem.EmployeeLeaveModel
+
+namespace EmployeeManagementSystem.Services
 {
     public class EmployeeLeaveService : IEmployeeLeave
     {

@@ -1,6 +1,7 @@
 ﻿using EmployeeManagementSystem.ViewModel;
 using System.Collections.Generic;
-namespace EmployeeManagementSystem.EmployeeLeaveModel
+namespace EmployeeManagementSystem.Interfaces
+
 {
     public interface IEmployeeLeave
     {

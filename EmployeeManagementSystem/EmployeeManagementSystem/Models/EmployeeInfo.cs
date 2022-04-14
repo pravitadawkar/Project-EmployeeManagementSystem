@@ -1,13 +1,13 @@
-﻿using EmployeeManagementSystem.EmployeeLeaveModel;
-using EmployeeManagementSystem.ProjectModel;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmployeeManagementSystem.DepartmentModel;
+//using EmployeeManagementSystem.DepartmentModel;
 using EmployeeManagementSystem.TimeSheetSegmentModel;
 
-namespace EmployeeManagementSystem.EmployeeModel
+namespace EmployeeManagementSystem.Models
+
 {
     public class EmployeeInfo
     {
@@ -21,7 +21,7 @@ namespace EmployeeManagementSystem.EmployeeModel
         public string Degree { get; set; }
         public string JoiningDate { get; set; }
         public string DepartmentName { get; set; }
-        public virtual EmployeeLeave Employeeleave { get; set; }
+        public virtual ICollection<EmployeeLeave> Employeeleave { get; set; }
         public virtual ICollection<Project> Project { get; set; }
         //public virtual Department Department { get; set; }
         //public virtual TimeSheet TimeSheet { get; set; }

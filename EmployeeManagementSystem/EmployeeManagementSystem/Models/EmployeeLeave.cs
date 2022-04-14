@@ -1,10 +1,10 @@
-﻿using EmployeeManagementSystem.EmployeeModel;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeeManagementSystem.EmployeeLeaveModel
+namespace EmployeeManagementSystem.Models
 {
     public class EmployeeLeave
     {
