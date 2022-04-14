@@ -1,5 +1,5 @@
 <h4 class="container-fluid text-success mt-4 ">Employee List</h4>
-<button type="button" class="btn btn-secondary btn-sm" style="float: right; margin: 20px; margin-right: 40px; " [routerLink]="['/supplierdetail/addsupplier']">
+<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="float: right; margin: 20px; margin-right: 40px; ">
     Add Employee
   </button>
 <table class="table      table-striped container-fluid mt-4">
@@ -8,8 +8,8 @@
             <td>Id</td>
             <td>FirstName</td>
             <td>Lastname</td>
-            <td>Address</td>
             <td>Email</td>
+            <td>Address</td>
             <td>DateOfBirth</td>
             <td>Gender</td>
             <td>Degree</td>
@@ -31,9 +31,132 @@
         <td>{{item.degree}}</td>
         <td>{{item.joiningDate}}</td>
         <td>{{item.departmentname}}</td>
-        <td><button>EDIT</button></td>
+        <td><button (click)="get_specific_employee()" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">EDIT</button></td>
         <td><button (click)="delete_employee(item.id)">DELETE</button></td>
 
     </tr>       
     </tbody>
   </table>
+   
+  <!-- this is for add employee on Add Employee Button click -->
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body " style="background-color: rgb(204, 229, 252);">
+          <form  [formGroup]=" EmployeeAddForm" >
+            <table>
+                <div class="mb-3">
+                <tr>
+                    <td><input type="text" placeholder="FirstName" class="form-control" formControlName="firstName"></td>
+                    <td><input type="text" placeholder="lastName" class="form-control" formControlName="lastName"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" placeholder="Email" class="form-control" formControlName="address"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="email" placeholder="adrress" class="form-control" formControlName="emailAddress"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td ><input type="date" placeholder="BirthDate" class="form-control" formControlName="dateOfBirth"></td>
+                    <td><input type="text" placeholder="Gender" class="form-control" formControlName="gender"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td><input type="text" placeholder="Degree" class="form-control" formControlName="degree"></td>
+                    <td><input type="date" placeholder="Joiningdate" class="form-control" formControlName="joiningDate"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" placeholder="Department" class="form-control" formControlName="departmentname"></td>
+                </tr>
+                
+                </div>
+              </table>     
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button" class="btn btn-primary" (click)="add_employee()">SUMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- this for update employee information -->
+  <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body " style="background-color: rgb(204, 229, 252);">
+          <form  [formGroup]=" empaddForm" >
+            <table>
+                <div class="mb-3">
+                <tr>
+                    <td><input type="text"  class="form-control" formControlName="firstName"></td>
+                    <td><input type="text"  class="form-control" formControlName="lastName"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" class="form-control" formControlName="address"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="email"  class="form-control" formControlName="emailAddress"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td ><input type="date" class="form-control" formControlName="dateOfBirth"></td>
+                    <td><input type="text" class="form-control" formControlName="gender"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td><input type="text"  class="form-control" formControlName="degree"></td>
+                    <td><input type="date"  class="form-control" formControlName="joiningDate"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text"  class="form-control" formControlName="departmentname"></td>
+                </tr>
+                
+                </div>
+              </table>     
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button" class="btn btn-primary" (click)="add_employee()">SUMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>

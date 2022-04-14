@@ -13,10 +13,10 @@ const routes: Routes = [
   children:[
     {path:'employees',loadChildren:() =>
     import('./presentation/layout/employee/employee.module').then((m) =>m.EmployeeModule)},
-    {path:'add-employee',loadChildren:() =>
-    import('./presentation/layout/add-employee/add-employee.module').then((m) =>m.AddEmployeeModule)},
-    {path:'assign-project',loadChildren:() =>
-    import('./presentation/modules/assign-project/assign-project.module').then((m) =>m.AssignProjectModule)},
+    //{path:'add-employee',loadChildren:() =>
+    //import('./presentation/layout/add-employee/add-employee.module').then((m) =>m.AddEmployeeModule)},
+   // {path:'assign-project',loadChildren:() =>
+   // import('./presentation/modules/assign-project/assign-project.module').then((m) =>m.AssignProjectModule)},
     {path:'projects',loadChildren:() =>
     import('./presentation/modules/project/project.module').then((m) =>m.ProjectModule)},
     {path:'empleave',loadChildren:() =>
