@@ -22,7 +22,8 @@ namespace EmployeeManagementSystem.Services
                           select new EmpLeaveDTO
                           {
                               EmployeeId = el.EmployeeId,
-                              FirstName=e.FirstName,
+                              EmpLeaveId = el.Id,
+                              FirstName =e.FirstName,
                               LastName=e.LastName,
                               StartDate = el.StartDate,
                               EndDate = el.EndDate,
@@ -40,6 +41,7 @@ namespace EmployeeManagementSystem.Services
                           select new EmpLeaveDTO
                           {
                               EmployeeId = el.EmployeeId,
+                              EmpLeaveId=el.Id,
                               FirstName = e.FirstName,
                               LastName = e.LastName,
                               StartDate = el.StartDate,
@@ -56,15 +58,19 @@ namespace EmployeeManagementSystem.Services
             if (isEmployeExist != null)
             {
                 EmployeeLeave employeeLeave = new EmployeeLeave();
+                employeeLeave.Id = empLeave.EmpLeaveId;
                 employeeLeave.StartDate = empLeave.StartDate;
                 employeeLeave.EndDate = empLeave.EndDate;
                 employeeLeave.Reason = empLeave.Reason;
                 employeeLeave.Status = empLeave.Status;
-                employeeLeave.EmployeeId = empLeave.EmployeeId;
+            employeeLeave.EmployeeId = empLeave.EmployeeId;
+
+
                 _context.Add(employeeLeave);
                 _context.SaveChanges();
 
                 EmployeeInfo employee = new EmployeeInfo();
+                //employee.Id = empLeave.EmployeeId;
                 employee.FirstName = empLeave.FirstName;
                 employee.LastName = empLeave.LastName;
                 _context.Add(employee);
@@ -84,28 +90,22 @@ namespace EmployeeManagementSystem.Services
             _context.SaveChanges();
 
             EmployeeInfo employee = new EmployeeInfo();
+           // employee.Id = empLeave.EmployeeId;
             employee.FirstName = empLeave.FirstName;
             employee.LastName = empLeave.LastName;
             _context.Update(employee);
             _context.SaveChanges();
         }
-        public void Delete(EmpLeaveDTO empLeave)
+        public void Delete(int id)
         {
-            EmployeeLeave employeeLeave = new EmployeeLeave();
-            employeeLeave.Id = empLeave.EmpLeaveId;
-            employeeLeave.StartDate = empLeave.StartDate;
-            employeeLeave.EndDate = empLeave.EndDate;
-            employeeLeave.Reason = empLeave.Reason;
-            employeeLeave.Status = empLeave.Status;
-            employeeLeave.EmployeeId = empLeave.EmployeeId;
-            _context.Remove(employeeLeave);
-            _context.SaveChanges();
+            var employeeleave = _context.EmployeeLeaves.Where(e => e.Id == id).FirstOrDefault();
 
-            EmployeeInfo employee = new EmployeeInfo();
-            employee.FirstName = empLeave.FirstName;
-            employee.LastName = empLeave.LastName;
-            _context.Remove(employee);
-            _context.SaveChanges();
+            if (employeeleave != null)
+            {
+                _context.Remove(employeeleave);
+                _context.SaveChanges();
+            }
         }
+            
     }
 }

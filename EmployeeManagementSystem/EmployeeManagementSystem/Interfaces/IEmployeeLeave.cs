@@ -9,6 +9,6 @@ namespace EmployeeManagementSystem.Interfaces
         public EmpLeaveDTO GetEmpLeave(int id);
         public void Insert(EmpLeaveDTO empLeave);
         public void Update(EmpLeaveDTO empLeave);
-        public void Delete(EmpLeaveDTO empLeave);
+        public void Delete(int id);
     }
 }

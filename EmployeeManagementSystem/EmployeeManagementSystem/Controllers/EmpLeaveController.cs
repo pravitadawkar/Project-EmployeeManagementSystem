@@ -55,9 +55,9 @@ namespace EmployeeManagementSystem.Controllers
         }
         [HttpPost]
         [Route("DeleteEmployeeLaeve")]
-        public IActionResult DeleteEmployeeLaeve(EmpLeaveDTO empLeave)
+        public IActionResult DeleteEmployeeLaeve(int id)
         {
-            _data.Delete(empLeave);
+            _data.Delete(id);
             return Ok();
         }
     }

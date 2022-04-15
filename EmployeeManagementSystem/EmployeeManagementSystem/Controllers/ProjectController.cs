@@ -1,4 +1,4 @@
-﻿using EmployeeManagementSystem.ProjectModel;
+﻿using EmployeeManagementSystem.Interfaces;
 using EmployeeManagementSystem.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
