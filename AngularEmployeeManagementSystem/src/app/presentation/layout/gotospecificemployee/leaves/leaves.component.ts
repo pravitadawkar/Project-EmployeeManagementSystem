@@ -3,14 +3,16 @@ import{FormBuilder, FormGroup,FormControlName,FormControl} from '@angular/forms'
 import { Validators } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Empleave } from 'src/app/core/models/empleave';
-import{EmpleaveService} from './../../../core/services/empleave.service'
+import{EmpleaveService} from './../../../../core/services/empleave.service'
+
 
 @Component({
-  selector: 'app-empleave',
-  templateUrl: './empleave.component.html',
-  styleUrls: ['./empleave.component.css']
+  selector: 'app-leaves',
+  templateUrl: './leaves.component.html',
+  styleUrls: ['./leaves.component.css']
 })
-export class EmpleaveComponent implements OnInit {
+export class LeavesComponent implements OnInit {
+
   listAllEmpleave!:Empleave[];
 
  // this for add Employee
@@ -52,7 +54,7 @@ export class EmpleaveComponent implements OnInit {
     this.get_allempleaves();
   }
   get_allempleaves(){
-    this._EmpleaveService.getAllEmpleave().subscribe
+    this._EmpleaveService.getEmpleaveById(localStorage.getItem("userId")||"").subscribe
     ( data =>
       {
         this.listAllEmpleave=data
@@ -60,7 +62,6 @@ export class EmpleaveComponent implements OnInit {
   
   }
   //add employee on button
-  
   add_empleave(){
      this._EmpleaveService.postEmpleave(this.EmpleaveAddForm.value).subscribe
     ( data =>
@@ -71,12 +72,5 @@ export class EmpleaveComponent implements OnInit {
       });
   }
 
-  //delete employee on button 
-  delete_empleave(id:number){
-    this._EmpleaveService.deleteEmpleave(id).subscribe
-    (data =>{
-      this.get_allempleaves();
-      alert('delete successfully');
-    })
-}
+
 }

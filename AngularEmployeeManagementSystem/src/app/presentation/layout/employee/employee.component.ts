@@ -21,12 +21,12 @@ export class EmployeeComponent implements OnInit {
       firstName:['',Validators.required],
       lastName:['',Validators.required],
       address:['',Validators.required],
-      emailAddress:['',Validators.required],
+      emailAddress:['',Validators.required,Validators.email],
       dateOfBirth:['',Validators.required],
       gender:['',Validators.required],
       degree:['',Validators.required],
       joiningDate:['',Validators.required],
-      departmentname:['',Validators.required]
+      departmentName:['',Validators.required]
 
   })
   
@@ -55,43 +55,43 @@ export class EmployeeComponent implements OnInit {
   get joiningDate(){
     return this.EmployeeAddForm.get('joiningDate')
   }
-  get departmentname(){
-    return this.EmployeeAddForm.get('departmentname')
+  get departmentName(){
+    return this.EmployeeAddForm.get('departmentName')
   }
  //get specific employees values for edit
- empaddForm=new FormGroup({
-  id:new FormControl(''),
-firstName:new FormControl(''),
-//supplieraddress:this.fb.group({
- lastName:new FormControl(''),
- address:new FormControl(''),
- emailAddress:new FormControl(''),
- dateOfBirth:new FormControl(''),
- gender:new FormControl(''),
- degree:new FormControl(''),
- joiningDate:new FormControl(''),
- departmentname:new FormControl('')
+//  empaddForm=new FormGroup({
+//   id:new FormControl(''),
+// firstName:new FormControl(''),
+// //supplieraddress:this.fb.group({
+//  lastName:new FormControl(''),
+//  address:new FormControl(''),
+//  emailAddress:new FormControl(''),
+//  dateOfBirth:new FormControl(''),
+//  gender:new FormControl(''),
+//  degree:new FormControl(''),
+//  joiningDate:new FormControl(''),
+//  departmentName:new FormControl('')
 
-})
- get_specific_employee(){
- let Id=this.router.snapshot.params['id'];
-  this._EmployeeService.getEmployeeById(Id).
-  subscribe((data)=>{
-    this.empaddForm=new FormGroup({
-      id:new FormControl(data['id']),
-      firstName:new FormControl(data['firstName']),
-      lastName:new FormControl(data['lastName']),
-      address:new FormControl(data['address']),
-      emailAddress:new FormControl(data['emailAddress']),
-       dateOfBirth:new FormControl(data['dateOfBirth']),
-       gender:new FormControl(data['gender']),
-       degree:new FormControl(data['degree']),
-       joiningDate:new FormControl(data['joiningDate']),
-       departmentname:new FormControl(data['departmentname'])
+// })
+//  get_specific_employee(){
+//  let Id=this.router.snapshot.params['id'];
+//   this._EmployeeService.getEmployeeById(Id).
+//   subscribe((data)=>{
+//     this.empaddForm=new FormGroup({
+//       id:new FormControl(data['id']),
+//       firstName:new FormControl(data['firstName']),
+//       lastName:new FormControl(data['lastName']),
+//       address:new FormControl(data['address']),
+//       emailAddress:new FormControl(data['emailAddress']),
+//       dateOfBirth:new FormControl(data['dateOfBirth']),
+//        gender:new FormControl(data['gender']),
+//        degree:new FormControl(data['degree']),
+//        joiningDate:new FormControl(data['joiningDate']),
+//        departmentname:new FormControl(data['departmentName'])
 
-    })
-  })
-}
+//     })
+//   })
+// }
   //get all employee 
   ngOnInit(): void {
     this._EmployeeService.getAllEmployees().subscribe
@@ -116,20 +116,23 @@ firstName:new FormControl(''),
     ( data =>
       {
         alert("Employee Added Successfully.")
-       // this.route.navigate(['/employees'])
+       let btn= document.getElementById("closebtn");
+       btn?.click();
+        this.get_allemployees();
+        //this.route.navigate([''])
       });
   }
-  //update employee on button click
-  update_employee(){
-    console.warn(this.empaddForm.value);
-  debugger
-  this._EmployeeService.updateEmployeee(this.empaddForm.value).
-  subscribe(data =>{
-    alert("employee update Successfully.")
-    //this.route.navigate(['/supplierdetail'])
-    console.warn(data);
-  })
-  }
+  // //update employee on button click
+  // update_employee(){
+  //   console.warn(this.empaddForm.value);
+  // debugger
+  // this._EmployeeService.updateEmployeee(this.empaddForm.value).
+  // subscribe(data =>{
+  //   alert("employee update Successfully.")
+  //   //this.route.navigate(['/supplierdetail'])
+  //   console.warn(data);
+  // })
+  // }
 
   //delete employee on button 
   delete_employee(id:number){

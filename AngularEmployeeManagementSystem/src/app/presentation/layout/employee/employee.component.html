@@ -30,8 +30,8 @@
         <td>{{item.gender}}</td>
         <td>{{item.degree}}</td>
         <td>{{item.joiningDate}}</td>
-        <td>{{item.departmentname}}</td>
-        <td><button (click)="get_specific_employee()" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">EDIT</button></td>
+        <td>{{item.departmentName}}</td>
+        <td><button [routerLink]="['/admin/updateemployee',item.id]"> EDIT </button></td>
         <td><button (click)="delete_employee(item.id)">DELETE</button></td>
 
     </tr>       
@@ -49,59 +49,52 @@
         </div>
         <div class="modal-body " style="background-color: rgb(204, 229, 252);">
           <form  [formGroup]=" EmployeeAddForm" >
-            <table>
+          
                 <div class="mb-3">
-                <tr>
-                    <td><input type="text" placeholder="FirstName" class="form-control" formControlName="firstName"></td>
-                    <td><input type="text" placeholder="lastName" class="form-control" formControlName="lastName"></td>
-                </tr>
-                <tr>
-                    <td> <br></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="text" placeholder="Email" class="form-control" formControlName="address"></td>
-                </tr>
-                <tr>
-                    <td> <br></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="email" placeholder="adrress" class="form-control" formControlName="emailAddress"></td>
-                </tr>
-                <tr>
-                    <td> <br></td>
-                </tr>
-                <tr>
-                    <td ><input type="date" placeholder="BirthDate" class="form-control" formControlName="dateOfBirth"></td>
-                    <td><input type="text" placeholder="Gender" class="form-control" formControlName="gender"></td>
-                </tr>
-                <tr>
-                    <td> <br></td>
-                </tr>
-                <tr>
-                    <td><input type="text" placeholder="Degree" class="form-control" formControlName="degree"></td>
-                    <td><input type="date" placeholder="Joiningdate" class="form-control" formControlName="joiningDate"></td>
-                </tr>
-                <tr>
-                    <td> <br></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="text" placeholder="Department" class="form-control" formControlName="departmentname"></td>
-                </tr>
+                
+                  <input type="text" placeholder="FirstName" class="form-control" formControlName="firstName">
+                  <span *ngIf="firstName && firstName.invalid && firstName.touched" style="color: red;">* This field is Requered</span><br>
+                  <input type="text" placeholder="lastName" class="form-control" formControlName="lastName">
+                  <span *ngIf="lastName && lastName.invalid && lastName.touched" style="color: red;">* This field is Requered</span><br>
+                  <input type="text" placeholder="Email" class="form-control" formControlName="address">
+                   <span *ngIf="address && address.invalid && address.touched" style="color: red;">* This field is Requered</span><br>
+                   <input type="email" placeholder="adrress" class="form-control" formControlName="emailAddress">
+                   <span *ngIf="emailAddress && emailAddress.invalid && emailAddress.touched" style="color: red;">* This field is Requered</span><br>
+                   <label  class="form-label"> Date Of Birth:</label>
+                   
+                   <input type="date" placeholder="BirthDate" class="form-control" formControlName="dateOfBirth">
+                   <span *ngIf="dateOfBirth && dateOfBirth.invalid && dateOfBirth.touched" style="color: red;">* This field is Requered</span><br>
+                   <div class="form-check">
+                    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+                    <label class="form-check-label" for="radio1">Male</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                    <label class="form-check-label" for="radio2">Female</label>
+                  </div>
+                  <br>
+                   <input type="text" placeholder="Degree" class="form-control" formControlName="degree">
+                   <span *ngIf="degree && degree.invalid && degree.touched" style="color: red;">* This field is Requered</span><br>
+                   <label  class="form-label">Joining Date:</label>
+                   <input type="date" placeholder="Joiningdate" class="form-control" formControlName="joiningDate">
+                   <span *ngIf="joiningDate && joiningDate.invalid && joiningDate.touched" style="color: red;">* This field is Requered</span><br>
+                   <input type="text" placeholder="Department" class="form-control" formControlName="departmentName">
+                   <span *ngIf="departmentName && departmentName.invalid && departmentName.touched" style="color: red;">* This field is Requered</span>                   
                 
                 </div>
-              </table>     
+                  
         </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-          <button type="button" class="btn btn-primary" (click)="add_employee()">SUMIT</button>
+          <button type="button" id="closebtn" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button"  class="btn btn-primary" (click)="add_employee()">SUMIT</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- this for update employee information -->
-  <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -159,4 +152,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->

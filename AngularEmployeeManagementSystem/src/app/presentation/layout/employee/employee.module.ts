@@ -5,12 +5,14 @@ import{HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
 import{EmployeeComponent} from './employee.component';
-import{EmployeeService} from './../../../core/services/employee.service'
+
+import{EmployeeService} from './../../../core/services/employee.service';
 import{InterceptorService} from './../../../core/interceptors/interceptor.service'
 
 @NgModule({
   declarations: [
-    EmployeeComponent
+    EmployeeComponent,
+    
   ],
   imports: [
     CommonModule,

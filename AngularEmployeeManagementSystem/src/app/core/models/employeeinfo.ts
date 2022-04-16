@@ -10,7 +10,7 @@ export class EmployeeInfo{
         this.degree='';
         this.joiningDate='';
        // this.departmentId:0;
-        this.departmentname="";
+        this.departmentName="";
 
     }
     id: number;
@@ -23,5 +23,5 @@ export class EmployeeInfo{
     degree: string;
     joiningDate: string;
     //departmentId: number;
-    departmentname: string;
+    departmentName: string;
 }

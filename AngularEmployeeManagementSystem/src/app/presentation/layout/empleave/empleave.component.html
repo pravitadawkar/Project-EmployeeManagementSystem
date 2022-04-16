@@ -1,1 +1,130 @@
-<p>empleave works!</p>
+<h4 class="container-fluid text-success mt-4 ">Employee Leave List</h4>
+<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="float: right; margin: 20px; margin-right: 40px; ">
+    Apply Leave
+  </button>
+<table class="table      table-striped container-fluid mt-4">
+    <thead class="h6">
+    <tr>
+            <td>EmployeeId</td>
+            <td>FirstName</td>
+            <td>Lastname</td>
+            <td>Start Date</td>
+            <td>End date</td>
+            <td>Reason</td>
+            <td>Status</td>
+            <td></td>
+            <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of listAllEmpleave">
+        <td>{{item.employeeId}}</td>
+        <td>{{item.firstName}}</td>
+        <td>{{item.lastName}}</td>
+        <td>{{item.startDate}}</td>
+        <td>{{item.endDate}}</td>
+        <td>{{item.reason}}</td>
+        <td>{{item.status}}</td>
+        <td><button> EDIT </button></td>
+        <td><button (click)="delete_empleave(item.empLeaveId)">DELETE</button></td>
+
+    </tr>       
+    </tbody>
+  </table>
+   
+  <!-- this is for add employee on Add Employee Button click -->
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body " style="background-color: rgb(204, 229, 252);">
+          <form  [formGroup]=" EmpleaveAddForm" >
+            <div class="mb-3">
+                  <label  class="form-label"> Start Date:</label>         
+                 <input type="date" placeholder="Start Date" class="form-control" formControlName="startDate">
+                 <span *ngIf="startDate && startDate.invalid && startDate.touched" style="color: red;">* This field is Requered</span><br>
+                 <label  class="form-label">End Date:</label>
+                 <input type="date" placeholder="End date" class="form-control" formControlName="endDate">
+                 <span *ngIf="endDate && endDate.invalid && endDate.touched" style="color: red;">* This field is Requered</span><br>
+                 <label  class="form-label"> Reason:</label>         
+                 <input type="text" placeholder="Reoson" class="form-control" formControlName="reason">
+                 <span *ngIf="reason && reason.invalid && reason.touched" style="color: red;">* This field is Requered</span>                   
+                 <label  class="form-label"> Status:</label>         
+                 <input type="text" placeholder="Status" class="form-control" formControlName="status">
+                 <span *ngIf="status && status.invalid && status.touched" style="color: red;">* This field is Requered</span>                   
+              
+              </div>     
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button" class="btn btn-primary" (click)="add_empleave()">SUMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- this for update employee information -->
+  <!-- <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body " style="background-color: rgb(204, 229, 252);">
+          <form  [formGroup]=" empaddForm" >
+            <table>
+                <div class="mb-3">
+                <tr>
+                    <td><input type="text"  class="form-control" formControlName="firstName"></td>
+                    <td><input type="text"  class="form-control" formControlName="lastName"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" class="form-control" formControlName="address"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="email"  class="form-control" formControlName="emailAddress"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td ><input type="date" class="form-control" formControlName="dateOfBirth"></td>
+                    <td><input type="text" class="form-control" formControlName="gender"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td><input type="text"  class="form-control" formControlName="degree"></td>
+                    <td><input type="date"  class="form-control" formControlName="joiningDate"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text"  class="form-control" formControlName="departmentname"></td>
+                </tr>
+                
+                </div>
+              </table>     
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button" class="btn btn-primary" (click)="add_employee()">SUMIT</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
