@@ -14,12 +14,18 @@ export class AuthguardGuard implements CanActivate {
   constructor(private router:Router){}
   canActivate():boolean
      {
-       
     if (!!localStorage.getItem('token')){
+      if(localStorage.getItem("role")==="Admin")
+      {
       return true;
+      }
+      else
+      {
+        return false;
+      }
     }else{
       this.router.navigateByUrl('/login')
-      return true;
+      return false;
     }
       
   }

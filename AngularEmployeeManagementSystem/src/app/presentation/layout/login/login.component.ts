@@ -26,7 +26,16 @@ export class LoginComponent implements OnInit {
       alert('login successfully!');
       localStorage.setItem('token',data.token);
       localStorage.setItem('userId',data.userId);
+      localStorage.setItem('role',data.role);
+      if(data.role==="Admin")
+      {
       this.router.navigate(['admin'])
+      }
+      else
+      {
+      this.router.navigate(['employeeinfo'])
+
+      }
     })
   }
   get username(){

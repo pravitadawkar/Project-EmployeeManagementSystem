@@ -11,23 +11,17 @@ import { AuthServiceService } from './core/services/auth-service.service';
 import{AuthguardGuard} from './core/gaurd/authguard.guard'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import{HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { ProfileComponent } from './presentation/layout/gotospecificemployee/profile/profile.component';
-import { LeavesComponent } from './presentation/layout/gotospecificemployee/leaves/leaves.component';
-import { MyprojectComponent } from './presentation/layout/gotospecificemployee/myproject/myproject.component';
-import { MainemployeeComponent } from './presentation/layout/gotospecificemployee/mainemployee/mainemployee.component';
+import { HomeComponent } from './presentation/layout/home/home.component';
+import { EmployeemainComponent } from './presentation/employee_layout/employeemain/employeemain.component';
+import { RolebaseGuard } from './core/gaurd/rolebase.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-   // AdminComponent,
-    //EmployeeComponent,
     LoginComponent,
-   ProfileComponent,
-   LeavesComponent,
-   MyprojectComponent,
-   MainemployeeComponent,
-   
+    HomeComponent,
+    EmployeemainComponent,  
   ],
   imports: [
     BrowserModule,
@@ -35,7 +29,7 @@ import { MainemployeeComponent } from './presentation/layout/gotospecificemploye
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthguardGuard,AuthServiceService,
+  providers: [AuthguardGuard,AuthServiceService,RolebaseGuard
     ],
   bootstrap: [AppComponent]
 })

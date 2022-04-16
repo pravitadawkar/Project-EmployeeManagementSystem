@@ -1,0 +1,16 @@
+label{
+    color: green;
+    font-size: large;
+}
+#main{
+    margin-top: 50px;
+    margin-left: 300px;
+}
+h4{
+    color: tomato;
+    margin: 50px;
+}
+input{
+    color: tomato;
+    font-size: large;
+}

@@ -1,0 +1,125 @@
+<div class="d-flex"> 
+<h4 class="container-fluid text-success mt-4 ">Holidays List</h4>
+<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="float: right;  margin-right: 40px;    width: 8%;
+height: 0%;
+margin-top: 1%; ">
+    Add Holidays
+  </button>
+</div>  
+<table class="table      table-striped container ">
+    <thead class="h6">
+    <tr>
+            <td>Name</td>
+            <td>Date</td>
+            <td>Discription</td>
+            
+            <td></td>
+            <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of listAllHolidays">
+        <td>{{item.name}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.description}}</td>
+       
+        <td><button> EDIT </button></td>
+        <td><button (click)="delete_holidays(item.id)">DELETE</button></td>
+
+    </tr>       
+    </tbody>
+  </table>
+   
+  <!-- this is for add employee on Add Employee Button click -->
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Holidays</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body " style="background-color: rgb(204, 229, 252);">
+          <form  [formGroup]=" HolidaysAddForm" >
+          
+                <div class="mb-3">
+                
+                  <input type="text" placeholder="Holidays Name" class="form-control" formControlName="name">
+                  <span *ngIf="name && name.invalid && name.touched" style="color: red;">* This field is Requered</span><br>
+                  <input type="text" placeholder="Enter Date" class="form-control" formControlName="date">
+                  <span *ngIf="date && date.invalid && date.touched" style="color: red;">* This field is Requered</span><br>
+                  <input type="text" placeholder="Discription" class="form-control" formControlName="description">
+                   <span *ngIf="description && description.invalid && description.touched" style="color: red;">* This field is Requered</span><br>
+                   
+                </div>
+                  
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closebtn" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button"  class="btn btn-primary" (click)="add_holidays()">SUMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- this for update employee information -->
+  <!-- <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body " style="background-color: rgb(204, 229, 252);">
+          <form  [formGroup]=" empaddForm" >
+            <table>
+                <div class="mb-3">
+                <tr>
+                    <td><input type="text"  class="form-control" formControlName="firstName"></td>
+                    <td><input type="text"  class="form-control" formControlName="lastName"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" class="form-control" formControlName="address"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="email"  class="form-control" formControlName="emailAddress"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td ><input type="date" class="form-control" formControlName="dateOfBirth"></td>
+                    <td><input type="text" class="form-control" formControlName="gender"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td><input type="text"  class="form-control" formControlName="degree"></td>
+                    <td><input type="date"  class="form-control" formControlName="joiningDate"></td>
+                </tr>
+                <tr>
+                    <td> <br></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text"  class="form-control" formControlName="departmentname"></td>
+                </tr>
+                
+                </div>
+              </table>     
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button" class="btn btn-primary" (click)="add_employee()">SUMIT</button>
+        </div>
+      </div>
+    </div>
+  </div> -->

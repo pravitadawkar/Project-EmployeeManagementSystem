@@ -20,7 +20,7 @@ export class EmployeeService {
   deleteEmployee(id:number):Observable<EmployeeInfo>{
       return this.httpclient.post<EmployeeInfo>("https://localhost:44390/api/EmployeeInfo/DeleteEmployeeInfo?id="+id,'')
   }
-  getEmployeeById(Id:number):Observable<EmployeeInfo>{
+  getEmployeeById(Id:string):Observable<EmployeeInfo>{
       return this.httpclient.get<EmployeeInfo>("https://localhost:44390/api/EmployeeInfo/GetEmployeeInfo?id="+Id);
   }
   updateEmployeee(model:EmployeeInfo):Observable<EmployeeInfo>{

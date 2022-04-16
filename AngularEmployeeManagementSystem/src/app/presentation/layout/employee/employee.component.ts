@@ -26,7 +26,8 @@ export class EmployeeComponent implements OnInit {
       gender:['',Validators.required],
       degree:['',Validators.required],
       joiningDate:['',Validators.required],
-      departmentName:['',Validators.required]
+      departmentName:['',Validators.required],
+      role:['',Validators.required]
 
   })
   
@@ -57,6 +58,9 @@ export class EmployeeComponent implements OnInit {
   }
   get departmentName(){
     return this.EmployeeAddForm.get('departmentName')
+  }
+  get role(){
+    return this.EmployeeAddForm.get('role')
   }
  //get specific employees values for edit
 //  empaddForm=new FormGroup({
@@ -139,7 +143,7 @@ export class EmployeeComponent implements OnInit {
     this._EmployeeService.deleteEmployee(id).subscribe
     (data =>{
       this.get_allemployees();
-      alert('delete successfully');
+     // alert('delete successfully');
     })
 }
 }

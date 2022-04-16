@@ -1,5 +1,5 @@
  thead{
-    background-color: rgb(59, 59, 253);
+    background-color: tomato;
     color: white;
     font-size: larger;
 }
@@ -11,4 +11,7 @@ thead{
 } */
 h4{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+table{
+    margin-top: 20px;
 }

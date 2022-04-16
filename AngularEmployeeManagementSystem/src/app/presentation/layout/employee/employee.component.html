@@ -1,100 +1,230 @@
-<h4 class="container-fluid text-success mt-4 ">Employee List</h4>
-<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="float: right; margin: 20px; margin-right: 40px; ">
+<div class="d-flex">
+  <h4 class="container-fluid text-success mt-4">Employee List</h4>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm"
+    data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop"
+    style="
+      width: 8%;
+      height: 0%;
+      margin-top: 1%;
+      float: right;
+      margin: 20px;
+      margin-right: 40px;
+    "
+  >
     Add Employee
   </button>
-<table class="table      table-striped container-fluid mt-4">
-    <thead class="h6">
+</div>
+<table class="table table-striped container-fluid mt-4">
+  <thead class="h6">
     <tr>
-            <td>Id</td>
-            <td>FirstName</td>
-            <td>Lastname</td>
-            <td>Email</td>
-            <td>Address</td>
-            <td>DateOfBirth</td>
-            <td>Gender</td>
-            <td>Degree</td>
-            <td>JoiningDate</td>
-            <td>Department</td>
-            <td></td>
-            <td></td>
+      <td>Id</td>
+      <td>FirstName</td>
+      <td>Lastname</td>
+      <td>Email</td>
+      <td>Address</td>
+      <td>DateOfBirth</td>
+      <td>Gender</td>
+      <td>Degree</td>
+      <td>JoiningDate</td>
+      <td>Department</td>
+      <td></td>
+      <td></td>
     </tr>
-    </thead>
-    <tbody>
+  </thead>
+  <tbody>
     <tr *ngFor="let item of listAllEmployee">
-        <td>{{item.id}}</td>
-        <td>{{item.firstName}}</td>
-        <td>{{item.lastName}}</td>
-        <td>{{item.emailAddress}}</td>
-        <td>{{item.address}}</td>
-        <td>{{item.dateOfBirth}}</td>
-        <td>{{item.gender}}</td>
-        <td>{{item.degree}}</td>
-        <td>{{item.joiningDate}}</td>
-        <td>{{item.departmentName}}</td>
-        <td><button [routerLink]="['/admin/updateemployee',item.id]"> EDIT </button></td>
-        <td><button (click)="delete_employee(item.id)">DELETE</button></td>
+      <td>{{ item.id }}</td>
+      <td>{{ item.firstName }}</td>
+      <td>{{ item.lastName }}</td>
+      <td>{{ item.emailAddress }}</td>
+      <td>{{ item.address }}</td>
+      <td>{{ item.dateOfBirth }}</td>
+      <td>{{ item.gender }}</td>
+      <td>{{ item.degree }}</td>
+      <td>{{ item.joiningDate }}</td>
+      <td>{{ item.departmentName }}</td>
+      <td>
+        <button [routerLink]="['/admin/updateemployee', item.id]">EDIT</button>
+      </td>
+      <td><button (click)="delete_employee(item.id)">DELETE</button></td>
+    </tr>
+  </tbody>
+</table>
 
-    </tr>       
-    </tbody>
-  </table>
-   
-  <!-- this is for add employee on Add Employee Button click -->
+<!-- this is for add employee on Add Employee Button click -->
 
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body " style="background-color: rgb(204, 229, 252);">
-          <form  [formGroup]=" EmployeeAddForm" >
-          
-                <div class="mb-3">
-                
-                  <input type="text" placeholder="FirstName" class="form-control" formControlName="firstName">
-                  <span *ngIf="firstName && firstName.invalid && firstName.touched" style="color: red;">* This field is Requered</span><br>
-                  <input type="text" placeholder="lastName" class="form-control" formControlName="lastName">
-                  <span *ngIf="lastName && lastName.invalid && lastName.touched" style="color: red;">* This field is Requered</span><br>
-                  <input type="text" placeholder="Email" class="form-control" formControlName="address">
-                   <span *ngIf="address && address.invalid && address.touched" style="color: red;">* This field is Requered</span><br>
-                   <input type="email" placeholder="adrress" class="form-control" formControlName="emailAddress">
-                   <span *ngIf="emailAddress && emailAddress.invalid && emailAddress.touched" style="color: red;">* This field is Requered</span><br>
-                   <label  class="form-label"> Date Of Birth:</label>
-                   
-                   <input type="date" placeholder="BirthDate" class="form-control" formControlName="dateOfBirth">
-                   <span *ngIf="dateOfBirth && dateOfBirth.invalid && dateOfBirth.touched" style="color: red;">* This field is Requered</span><br>
-                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
-                    <label class="form-check-label" for="radio1">Male</label>
-                  </div>
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
-                    <label class="form-check-label" for="radio2">Female</label>
-                  </div>
-                  <br>
-                   <input type="text" placeholder="Degree" class="form-control" formControlName="degree">
-                   <span *ngIf="degree && degree.invalid && degree.touched" style="color: red;">* This field is Requered</span><br>
-                   <label  class="form-label">Joining Date:</label>
-                   <input type="date" placeholder="Joiningdate" class="form-control" formControlName="joiningDate">
-                   <span *ngIf="joiningDate && joiningDate.invalid && joiningDate.touched" style="color: red;">* This field is Requered</span><br>
-                   <input type="text" placeholder="Department" class="form-control" formControlName="departmentName">
-                   <span *ngIf="departmentName && departmentName.invalid && departmentName.touched" style="color: red;">* This field is Requered</span>                   
-                
-                </div>
-                  
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="background-color: rgb(204, 229, 252)">
+        <form [formGroup]="EmployeeAddForm">
+          <div class="mb-3">
+            <input
+              type="text"
+              placeholder="FirstName"
+              class="form-control"
+              formControlName="firstName"
+            />
+            <span
+              *ngIf="firstName && firstName.invalid && firstName.touched"
+              style="color: red"
+              >* This field is Requered</span
+            ><br />
+            <input
+              type="text"
+              placeholder="lastName"
+              class="form-control"
+              formControlName="lastName"
+            />
+            <span
+              *ngIf="lastName && lastName.invalid && lastName.touched"
+              style="color: red"
+              >* This field is Requered</span
+            ><br />
+            <input
+              type="text"
+              placeholder="Email"
+              class="form-control"
+              formControlName="address"
+            />
+            <span
+              *ngIf="address && address.invalid && address.touched"
+              style="color: red"
+              >* This field is Requered</span
+            ><br />
+            <input
+              type="email"
+              placeholder="adrress"
+              class="form-control"
+              formControlName="emailAddress"
+            />
+            <span
+              *ngIf="
+                emailAddress && emailAddress.invalid && emailAddress.touched
+              "
+              style="color: red"
+              >* This field is Requered</span
+            ><br />
+            <label class="form-label"> Date Of Birth:</label>
+
+            <input
+              type="date"
+              placeholder="BirthDate"
+              class="form-control"
+              formControlName="dateOfBirth"
+            />
+            <span
+              *ngIf="dateOfBirth && dateOfBirth.invalid && dateOfBirth.touched"
+              style="color: red"
+              >* This field is Requered</span
+            ><br />
+            <div class="form-check">
+              <input
+                type="radio"
+                class="form-check-input"
+                id="radio1"
+                name="optradio"
+                value="option1"
+                checked
+              />
+              <label class="form-check-label" for="radio1">Male</label>
+            </div>
+            <div class="form-check">
+              <input
+                type="radio"
+                class="form-check-input"
+                id="radio2"
+                name="optradio"
+                value="option2"
+              />
+              <label class="form-check-label" for="radio2">Female</label>
+            </div>
+            <br />
+            <input
+              type="text"
+              placeholder="Degree"
+              class="form-control"
+              formControlName="degree"
+            />
+            <span
+              *ngIf="degree && degree.invalid && degree.touched"
+              style="color: red"
+              >* This field is Requered</span
+            ><br />
+            <label class="form-label">Joining Date:</label>
+            <input
+              type="date"
+              placeholder="Joiningdate"
+              class="form-control"
+              formControlName="joiningDate"
+            />
+            <span
+              *ngIf="joiningDate && joiningDate.invalid && joiningDate.touched"
+              style="color: red"
+              >* This field is Requered</span
+            ><br />
+            <input
+              type="text"
+              placeholder="Department"
+              class="form-control"
+              formControlName="departmentName"
+            />
+            <span
+              *ngIf="
+                departmentName &&
+                departmentName.invalid &&
+                departmentName.touched
+              "
+              style="color: red"
+              >* This field is Requered</span
+            >
+            <label  for="Role">Role</label>
+            <select formControlName="role" name="role" id="role">
+              <option value="Admin">Admin</option>
+              <option value="Employee">Employee</option>
+            </select>
+          </div>
         </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="closebtn" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-          <button type="button"  class="btn btn-primary" (click)="add_employee()">SUMIT</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="closebtn"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" (click)="add_employee()">
+          SUMIT
+        </button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- this for update employee information -->
-  <!-- <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- this for update employee information -->
+<!-- <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -106,7 +236,7 @@
             <table>
                 <div class="mb-3">
                 <tr>
-                    <td><input type="text"  class="form-control" formControlName="firstName"></td>
+                    <td><input type="text"  class="form-control" EmployeeForm></td>
                     <td><input type="text"  class="form-control" formControlName="lastName"></td>
                 </tr>
                 <tr>
