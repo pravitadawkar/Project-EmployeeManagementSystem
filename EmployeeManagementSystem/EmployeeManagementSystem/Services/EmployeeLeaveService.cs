@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using EmployeeManagementSystem.Interfaces;
 
-
 namespace EmployeeManagementSystem.Services
 {
     public class EmployeeLeaveService : IEmployeeLeave
@@ -23,8 +22,8 @@ namespace EmployeeManagementSystem.Services
                           {
                               EmployeeId = el.EmployeeId,
                               EmpLeaveId = el.Id,
-                              FirstName =e.FirstName,
-                              LastName=e.LastName,
+                              FirstName = e.FirstName,
+                              LastName = e.LastName,
                               StartDate = el.StartDate,
                               EndDate = el.EndDate,
                               Reason = el.Reason,
@@ -33,22 +32,20 @@ namespace EmployeeManagementSystem.Services
             return result;
 
         }
-        public EmpLeaveDTO GetEmpLeave(int Employeeid)
+        public List<EmpLeaveDTO> GetEmpLeave(int Employeeid)
         {
             var result = (from e in _context.EmployeeInfos
                           join el in _context.EmployeeLeaves on e.Id equals el.EmployeeId
-                          where e.Id==Employeeid
+                          where e.Id == Employeeid
                           select new EmpLeaveDTO
                           {
                               EmployeeId = el.EmployeeId,
-                              EmpLeaveId=el.Id,
-                              FirstName = e.FirstName,
-                              LastName = e.LastName,
+                              EmpLeaveId = el.Id,
                               StartDate = el.StartDate,
                               EndDate = el.EndDate,
                               Reason = el.Reason,
                               Status = el.Status,
-                          }).FirstOrDefault();
+                          }).ToList();
             return result;
 
         }
@@ -58,22 +55,12 @@ namespace EmployeeManagementSystem.Services
             if (isEmployeExist != null)
             {
                 EmployeeLeave employeeLeave = new EmployeeLeave();
-                employeeLeave.Id = empLeave.EmpLeaveId;
                 employeeLeave.StartDate = empLeave.StartDate;
                 employeeLeave.EndDate = empLeave.EndDate;
                 employeeLeave.Reason = empLeave.Reason;
                 employeeLeave.Status = empLeave.Status;
-            employeeLeave.EmployeeId = empLeave.EmployeeId;
-
-
+                employeeLeave.EmployeeId = empLeave.EmployeeId;
                 _context.Add(employeeLeave);
-                _context.SaveChanges();
-
-                EmployeeInfo employee = new EmployeeInfo();
-                //employee.Id = empLeave.EmployeeId;
-                employee.FirstName = empLeave.FirstName;
-                employee.LastName = empLeave.LastName;
-                _context.Add(employee);
                 _context.SaveChanges();
             }
         }
@@ -88,13 +75,6 @@ namespace EmployeeManagementSystem.Services
             employeeLeave.EmployeeId = empLeave.EmployeeId;
             _context.Update(employeeLeave);
             _context.SaveChanges();
-
-            EmployeeInfo employee = new EmployeeInfo();
-           // employee.Id = empLeave.EmployeeId;
-            employee.FirstName = empLeave.FirstName;
-            employee.LastName = empLeave.LastName;
-            _context.Update(employee);
-            _context.SaveChanges();
         }
         public void Delete(int id)
         {
@@ -106,6 +86,5 @@ namespace EmployeeManagementSystem.Services
                 _context.SaveChanges();
             }
         }
-            
     }
 }

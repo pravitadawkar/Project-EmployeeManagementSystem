@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EmployeeManagementSystem.Migrations
 {
-    public partial class empinfo : Migration
+    public partial class emp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,19 +47,24 @@ namespace EmployeeManagementSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Departments",
+                name: "EmployeeInfos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAT = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBY = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Degree = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JoiningDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departments", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeInfos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,28 +192,24 @@ namespace EmployeeManagementSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeInfos",
+                name: "EmployeeLeaves",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Degree = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    JoiningDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EndDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeInfos", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeLeaves", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeInfos_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
+                        name: "FK_EmployeeLeaves_EmployeeInfos_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "EmployeeInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -233,29 +234,6 @@ namespace EmployeeManagementSystem.Migrations
                         name: "FK_EmployeeInfoProject_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EmployeeLeaves",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeLeaves", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EmployeeLeaves_EmployeeInfos_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "EmployeeInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -305,16 +283,9 @@ namespace EmployeeManagementSystem.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeInfos_DepartmentId",
-                table: "EmployeeInfos",
-                column: "DepartmentId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EmployeeLeaves_EmployeeId",
                 table: "EmployeeLeaves",
-                column: "EmployeeId",
-                unique: true);
+                column: "EmployeeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -351,9 +322,6 @@ namespace EmployeeManagementSystem.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmployeeInfos");
-
-            migrationBuilder.DropTable(
-                name: "Departments");
         }
     }
 }

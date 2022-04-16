@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.ViewModel;
+using Microsoft.AspNetCore.Identity;
+using EmployeeManagementSystem.Authentication;
 
 namespace EmployeeManagementSystem.Controllers
 {
@@ -16,8 +18,11 @@ namespace EmployeeManagementSystem.Controllers
     public class EmployeeInfoController : ControllerBase
     {
         IEmployeeInfo _data;
-        public EmployeeInfoController(IEmployeeInfo data)
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public EmployeeInfoController(UserManager<ApplicationUser> userManager, IEmployeeInfo data)
         {
+            this.userManager = userManager;
             _data = data;
         }
         [HttpGet]
@@ -36,10 +41,35 @@ namespace EmployeeManagementSystem.Controllers
         }
         [HttpPost]
         [Route("AddEmployeeInfo")]
-        public IActionResult AddEmployeeInfo(EmployeeDTO employeeInfo)
+        public async Task<IActionResult> AddEmployeeInfoAsync(EmployeeDTO employeeInfo)
         {
-            _data.Insert(employeeInfo);
-            return Ok();
+            try
+            {
+                var userExists = await userManager.FindByNameAsync(employeeInfo.FirstName);
+                if (userExists != null)
+                    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+
+                ApplicationUser user = new ApplicationUser()
+                {
+                    Email = employeeInfo.EmailAddress,
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    UserName = employeeInfo.FirstName,
+                };
+                var result = await userManager.CreateAsync(user, "Password@123");
+                var roleresult = userManager.AddToRoleAsync(user, employeeInfo.Role).Result;
+                employeeInfo.UserId = user.Id;
+                _data.Insert(employeeInfo);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is ArgumentException)
+                {
+                    return StatusCode(400, ex.InnerException.Message);
+                }
+
+                return StatusCode(statusCode: 500, ex.Message + ";" + ex.InnerException?.Message);
+            }
         }
         [HttpPost]
         [Route("UpdateEmployeeInfo")]

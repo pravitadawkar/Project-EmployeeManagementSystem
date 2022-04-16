@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220413082417_reapete")]
-    partial class reapete
+    [Migration("20220415051024_emp")]
+    partial class emp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,61 +101,7 @@ namespace EmployeeManagementSystem.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.DepartmentModel.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedAT")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreatedBY")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DepartmentName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeLeaveModel.EmployeeLeave", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
-
-                    b.ToTable("EmployeeLeaves");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,7 +140,36 @@ namespace EmployeeManagementSystem.Migrations
                     b.ToTable("EmployeeInfos");
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.ProjectModel.Project", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeLeave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EndDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StartDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeLeaves");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -357,24 +332,24 @@ namespace EmployeeManagementSystem.Migrations
 
             modelBuilder.Entity("EmployeeInfoProject", b =>
                 {
-                    b.HasOne("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", null)
+                    b.HasOne("EmployeeManagementSystem.Models.EmployeeInfo", null)
                         .WithMany()
                         .HasForeignKey("EmployeeinfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EmployeeManagementSystem.ProjectModel.Project", null)
+                    b.HasOne("EmployeeManagementSystem.Models.Project", null)
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeLeaveModel.EmployeeLeave", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeLeave", b =>
                 {
-                    b.HasOne("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", "Employeeinfo")
-                        .WithOne("Employeeleave")
-                        .HasForeignKey("EmployeeManagementSystem.EmployeeLeaveModel.EmployeeLeave", "EmployeeId")
+                    b.HasOne("EmployeeManagementSystem.Models.EmployeeInfo", "Employeeinfo")
+                        .WithMany("Employeeleave")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -432,7 +407,7 @@ namespace EmployeeManagementSystem.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeInfo", b =>
                 {
                     b.Navigation("Employeeleave");
                 });

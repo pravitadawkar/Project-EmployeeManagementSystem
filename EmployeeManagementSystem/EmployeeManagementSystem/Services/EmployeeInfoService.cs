@@ -7,7 +7,6 @@ using EmployeeManagementSystem.Interfaces;
 using EmployeeManagementSystem.ViewModel;
 using EmployeeManagementSystem.Models;
 
-
 namespace EmployeeManagementSystem.Services
 {
     public class EmployeeInfoService : IEmployeeInfo
@@ -31,14 +30,33 @@ namespace EmployeeManagementSystem.Services
                              Gender = e.Gender,
                              Degree = e.Degree,
                              JoiningDate = e.JoiningDate,
-                             DepartmentName=e.DepartmentName
+                             DepartmentName = e.DepartmentName
                          }).ToList();
             return reslt;
 
         }
         public EmployeeDTO GetEmployee(int id)
         {
-            var reslt = (from e in _context.EmployeeInfos
+            var reslt = (from e in _context.EmployeeInfos.Where(e => e.Id == id)
+                         select new EmployeeDTO
+                         {
+                             Id = e.Id,
+                             FirstName = e.FirstName,
+                             LastName = e.LastName,
+                             EmailAddress = e.EmailAddress,
+                             Address = e.Address,
+                             DateOfBirth = e.DateOfBirth,
+                             Gender = e.Gender,
+                             Degree = e.Degree,
+                             JoiningDate = e.JoiningDate,
+                             DepartmentName = e.DepartmentName
+                         }).FirstOrDefault();
+            return reslt;
+        }
+
+        public EmployeeDTO GetEmployeeByUserId(string id)
+        {
+            var reslt = (from e in _context.EmployeeInfos.Where(e => e.UserId == id)
                          select new EmployeeDTO
                          {
                              Id = e.Id,
@@ -66,6 +84,8 @@ namespace EmployeeManagementSystem.Services
             employeeinfo.Degree = employeeInfo.Degree;
             employeeinfo.JoiningDate = employeeInfo.JoiningDate;
             employeeinfo.DepartmentName = employeeInfo.DepartmentName;
+            employeeinfo.UserId = employeeInfo.UserId;
+            employeeinfo.Role = employeeInfo.Role;
             _context.Add(employeeinfo);
             _context.SaveChanges();
         }

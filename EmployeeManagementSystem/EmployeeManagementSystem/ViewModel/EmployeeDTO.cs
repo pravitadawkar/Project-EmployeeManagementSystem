@@ -15,5 +15,7 @@ namespace EmployeeManagementSystem.ViewModel
         public string JoiningDate { get; set; }
         //public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
+        public string UserId { get; set; }
+        public string Role { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220411073107_empinfo")]
-    partial class empinfo
+    [Migration("20220415091853_emp1")]
+    partial class emp1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,61 +101,7 @@ namespace EmployeeManagementSystem.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.DepartmentModel.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedAT")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreatedBY")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DepartmentName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeLeaveModel.EmployeeLeave", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
-
-                    b.ToTable("EmployeeLeaves");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -165,14 +111,14 @@ namespace EmployeeManagementSystem.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
@@ -183,21 +129,50 @@ namespace EmployeeManagementSystem.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("JoiningDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("JoiningDate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("DepartmentId")
-                        .IsUnique();
+                    b.HasKey("Id");
 
                     b.ToTable("EmployeeInfos");
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.ProjectModel.Project", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeLeave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EndDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StartDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeLeaves");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -360,39 +335,28 @@ namespace EmployeeManagementSystem.Migrations
 
             modelBuilder.Entity("EmployeeInfoProject", b =>
                 {
-                    b.HasOne("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", null)
+                    b.HasOne("EmployeeManagementSystem.Models.EmployeeInfo", null)
                         .WithMany()
                         .HasForeignKey("EmployeeinfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EmployeeManagementSystem.ProjectModel.Project", null)
+                    b.HasOne("EmployeeManagementSystem.Models.Project", null)
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeLeaveModel.EmployeeLeave", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeLeave", b =>
                 {
-                    b.HasOne("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", "Employeeinfo")
-                        .WithOne("Employeeleave")
-                        .HasForeignKey("EmployeeManagementSystem.EmployeeLeaveModel.EmployeeLeave", "EmployeeId")
+                    b.HasOne("EmployeeManagementSystem.Models.EmployeeInfo", "Employeeinfo")
+                        .WithMany("Employeeleave")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employeeinfo");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", b =>
-                {
-                    b.HasOne("EmployeeManagementSystem.DepartmentModel.Department", "Department")
-                        .WithOne("Employeeinfo")
-                        .HasForeignKey("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", "DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -446,12 +410,7 @@ namespace EmployeeManagementSystem.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.DepartmentModel.Department", b =>
-                {
-                    b.Navigation("Employeeinfo");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.EmployeeModel.EmployeeInfo", b =>
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeInfo", b =>
                 {
                     b.Navigation("Employeeleave");
                 });

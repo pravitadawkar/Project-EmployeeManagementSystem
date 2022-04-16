@@ -5,6 +5,11 @@
       "ProjectGuid": "843d863f-4aa1-4a35-8d7d-6155a6c828c6",
       "DisplayName": "EmployeeManagementSystem",
       "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 1

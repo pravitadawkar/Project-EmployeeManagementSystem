@@ -25,7 +25,7 @@ namespace EmployeeManagementSystem.Controllers
             return Ok(result);
         }
         [HttpGet]
-        [Route("EmployeeLeave")]
+        [Route("EmployeeLeaveById")]
         public IActionResult EmployeeLeave(int id)
         {
             var result = _data.GetEmpLeave(id);

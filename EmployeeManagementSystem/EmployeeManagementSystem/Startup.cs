@@ -48,9 +48,10 @@ namespace EmployeeManagementSystem
             services.AddTransient<IEmployeeInfo, EmployeeInfoService>();
             services.AddTransient<IEmployeeLeave, EmployeeLeaveService>();
             services.AddTransient<IProject, ProjectService>();
+            services.AddTransient<INotice, NoticeService>();
+            services.AddTransient<IHolidays, HolidaysService>();
+
             //services.AddTransient<IDepartment, DepartmentService>();
-
-
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
 

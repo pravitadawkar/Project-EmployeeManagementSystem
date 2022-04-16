@@ -25,5 +25,7 @@ namespace EmployeeManagementSystem.Models
         public virtual ICollection<Project> Project { get; set; }
         //public virtual Department Department { get; set; }
         //public virtual TimeSheet TimeSheet { get; set; }
+        public string UserId { get; set; }
+        public string Role { get; set; }
     }
 }

@@ -44,5 +44,7 @@ namespace EmployeeManagementSystem.Authentication
         public DbSet<Project> Projects { get; set; }
         //public DbSet<Department> Departments { get; set; }
         //public DbSet<TimeSheet> TimeSheets { get; set; }
+        public DbSet<Notice> Notices { get; set; }
+        public DbSet<Holidays> holidays { get; set; }
     }
 }

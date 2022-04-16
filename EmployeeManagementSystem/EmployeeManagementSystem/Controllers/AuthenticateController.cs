@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.Authentication;
+using EmployeeManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,50 +20,66 @@ namespace EmployeeManagementSystem.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration _configuration;
+        IEmployeeInfo _data;
 
-        public AuthenticateController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public AuthenticateController(UserManager<ApplicationUser> userManager, IConfiguration configuration, IEmployeeInfo data)
         {
             this.userManager = userManager;
             _configuration = configuration;
+            _data = data;
         }
 
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await userManager.FindByNameAsync(model.Username);
-            if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+            try
             {
-                var userRoles = await userManager.GetRolesAsync(user);
+                var user = await userManager.FindByNameAsync(model.Username);
+                if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+                {
+                    var userRoles = await userManager.GetRolesAsync(user);
 
-                var authClaims = new List<Claim>
+                    var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
-                foreach (var userRole in userRoles)
+                    foreach (var userRole in userRoles)
+                    {
+                        authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    }
+
+                    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+                    var token = new JwtSecurityToken(
+                        issuer: _configuration["JWT:ValidIssuer"],
+                        audience: _configuration["JWT:ValidAudience"],
+                        expires: DateTime.Now.AddHours(3),
+                        claims: authClaims,
+                        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                        );
+
+                    return Ok(new
+                    {
+                        token = new JwtSecurityTokenHandler().WriteToken(token),
+                        expiration = token.ValidTo,
+                        UserId = _data.GetEmployeeByUserId(user.Id)?.Id,
+                        Role = userRoles[0]
+                    });
+                }
+                return Unauthorized();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is ArgumentException)
                 {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    return StatusCode(400, ex.InnerException.Message);
                 }
 
-                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-                var token = new JwtSecurityToken(
-                    issuer: _configuration["JWT:ValidIssuer"],
-                    audience: _configuration["JWT:ValidAudience"],
-                    expires: DateTime.Now.AddHours(3),
-                    claims: authClaims,
-                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                    );
-
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
+                return StatusCode(statusCode: 500, ex.Message + ";" + ex.InnerException?.Message);
             }
-            return Unauthorized();
         }
 
         [HttpPost]
@@ -85,6 +102,5 @@ namespace EmployeeManagementSystem.Controllers
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
-
     }
 }
