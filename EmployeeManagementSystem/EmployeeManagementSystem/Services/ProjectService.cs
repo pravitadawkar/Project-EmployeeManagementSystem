@@ -5,7 +5,6 @@ using EmployeeManagementSystem.Authentication;
 using System.Linq;
 using EmployeeManagementSystem.Interfaces;
 
-
 namespace EmployeeManagementSystem.Services
 {
     public class ProjectService : IProject
@@ -17,79 +16,73 @@ namespace EmployeeManagementSystem.Services
         }
         public List<ProjectDTO> GetProjects()
         {
-            var result = (from
-                           p in _context.Projects
-                          select new ProjectDTO
-                          {
-                              EmployeeId = p.EmployeeId,
-                              ProjectId = p.Id,
-                              ProjectName = p.ProjectName,
-                              DueDate = p.DueDate,
-                              SubmitDate = p.SubmitDate,
-                              Mark = p.Mark,
-                              Status = p.Status
-                          }).ToList();
-            return result;
+            var reslt = (from e in _context.Projects
+                         select new ProjectDTO
+                         {
+                             ProjectId = e.Id,
+                             ProjectName = e.ProjectName,
+                             DueDate = e.DueDate,
+                             SubmitDate = e.SubmitDate,
+                             Status = e.Status,
+
+                         }).ToList();
+            return reslt;
         }
         public ProjectDTO GetProject(int id)
         {
-            var result = (from
-                           p in _context.Projects
-                          where p.EmployeeId == id
-                          select new ProjectDTO
-                          {
-                              EmployeeId = p.EmployeeId,
-                              ProjectId = p.Id,
-                              ProjectName = p.ProjectName,
-                              DueDate = p.DueDate,
-                              SubmitDate = p.SubmitDate,
-                              Mark = p.Mark,
-                              Status = p.Status
-                          }).FirstOrDefault();
-            return result;
+            var reslt = (from e in _context.Projects
+                         select new ProjectDTO
+                         {
+                             ProjectId = e.Id,
+                             ProjectName = e.ProjectName,
+                             DueDate = e.DueDate,
+                             SubmitDate = e.SubmitDate,
+                             Status = e.Status,
+
+                         }).FirstOrDefault();
+            return reslt;
         }
         public void Insert(ProjectDTO project)
         {
-            var isEmployeExist = _context.EmployeeInfos.FirstOrDefault(e => e.Id == project.EmployeeId);
-            if (isEmployeExist != null)
+            Project project1 = new Project();
+            project1.Id = project.ProjectId;
+            project1.ProjectName = project.ProjectName;
+            project1.DueDate = project.DueDate;
+            project1.SubmitDate = project.SubmitDate;
+            project1.Status = project.Status;
+            _context.Add(project);
+            _context.SaveChanges();
+        }
+        public void update(ProjectDTO project)
+        {
+            Project project1 = new Project();
+            project1.Id = project.ProjectId;
+            project1.ProjectName = project.ProjectName;
+            project1.DueDate = project.DueDate;
+            project1.SubmitDate = project.SubmitDate;
+            project1.Status = project.Status;
+            _context.Update(project);
+            _context.SaveChanges();
+        }
+        public void delete(int id)
+        {
+            var project = _context.Projects.Where(e => e.Id == id).FirstOrDefault();
+
+            if (project != null)
             {
-                Project project1 = new Project();
-                project1.Id = project.ProjectId;
-                project1.ProjectName = project.ProjectName;
-                project1.DueDate = project.DueDate;
-                project1.SubmitDate = project.SubmitDate;
-                project1.Mark = project.Mark;
-                project1.Status = project.Status;
-                project1.EmployeeId = project.EmployeeId;
-                _context.Add(project1);
+                _context.Remove(project);
                 _context.SaveChanges();
             }
         }
+
         public void Update(ProjectDTO project)
         {
-            Project project1 = new Project();
-            project1.Id = project.ProjectId;
-            project1.ProjectName = project.ProjectName;
-            project1.DueDate = project.DueDate;
-            project1.SubmitDate = project.SubmitDate;
-            project1.Mark = project.Mark;
-            project1.Status = project.Status;
-            project1.EmployeeId = project.EmployeeId;
-            _context.Update(project1);
-            _context.SaveChanges();
+            throw new System.NotImplementedException();
         }
-        public void Delete(ProjectDTO project)
+
+        public void Delete(int id)
         {
-            Project project1 = new Project();
-            project1.Id = project.ProjectId;
-            project1.ProjectName = project.ProjectName;
-            project1.DueDate = project.DueDate;
-            project1.SubmitDate = project.SubmitDate;
-            project1.Mark = project.Mark;
-            project1.Status = project.Status;
-            project1.EmployeeId = project.EmployeeId;
-            _context.Remove(project1);
-            _context.SaveChanges();
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -22,7 +22,8 @@ namespace EmployeeManagementSystem.Models
         public string JoiningDate { get; set; }
         public string DepartmentName { get; set; }
         public virtual ICollection<EmployeeLeave> Employeeleave { get; set; }
-        public virtual ICollection<Project> Project { get; set; }
+        public virtual ICollection<EmployeeProject> EmployeeProject { get; set; }
+
         //public virtual Department Department { get; set; }
         //public virtual TimeSheet TimeSheet { get; set; }
         public string UserId { get; set; }

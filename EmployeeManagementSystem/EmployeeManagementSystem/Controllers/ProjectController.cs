@@ -53,9 +53,9 @@ namespace EmployeeManagementSystem.Controllers
         }
         [HttpPost]
         [Route("DeleteProject")]
-        public IActionResult DeleteProject(ProjectDTO project)
+        public IActionResult DeleteProject(int id)
         {
-            _data.Delete(project);
+            _data.Delete(id);
             return Ok();
         }
     }

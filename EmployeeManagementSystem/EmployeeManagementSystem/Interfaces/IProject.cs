@@ -9,7 +9,7 @@ namespace EmployeeManagementSystem.Interfaces
         public ProjectDTO GetProject(int id);
         public void Insert(ProjectDTO project);
         public void Update(ProjectDTO project);
-        public void Delete(ProjectDTO project);
+        public void Delete(int id);
 
     }
 }

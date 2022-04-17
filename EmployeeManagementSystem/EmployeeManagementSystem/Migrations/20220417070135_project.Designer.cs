@@ -4,20 +4,37 @@ using EmployeeManagementSystem.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeeManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220417070135_project")]
+    partial class project
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("EmployeeInfoProject", b =>
+                {
+                    b.Property<int>("EmployeeinfoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeeinfoId", "ProjectId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("EmployeeInfoProject");
+                });
 
             modelBuilder.Entity("EmployeeManagementSystem.Authentication.ApplicationUser", b =>
                 {
@@ -158,21 +175,6 @@ namespace EmployeeManagementSystem.Migrations
                     b.ToTable("EmployeeLeaves");
                 });
 
-            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeProject", b =>
-                {
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmployeeId", "ProjectId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("EmployeeProject");
-                });
-
             modelBuilder.Entity("EmployeeManagementSystem.Models.Holidays", b =>
                 {
                     b.Property<int>("Id")
@@ -222,8 +224,8 @@ namespace EmployeeManagementSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DueDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ProjectName")
                         .HasColumnType("nvarchar(max)");
@@ -231,8 +233,8 @@ namespace EmployeeManagementSystem.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SubmitDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -370,6 +372,21 @@ namespace EmployeeManagementSystem.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("EmployeeInfoProject", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.EmployeeInfo", null)
+                        .WithMany()
+                        .HasForeignKey("EmployeeinfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EmployeeManagementSystem.Models.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeLeave", b =>
                 {
                     b.HasOne("EmployeeManagementSystem.Models.EmployeeInfo", "Employeeinfo")
@@ -379,25 +396,6 @@ namespace EmployeeManagementSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("Employeeinfo");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeProject", b =>
-                {
-                    b.HasOne("EmployeeManagementSystem.Models.EmployeeInfo", "Employeeinfo")
-                        .WithMany("EmployeeProject")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EmployeeManagementSystem.Models.Project", "Project")
-                        .WithMany("EmployeeProject")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employeeinfo");
-
-                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -454,13 +452,6 @@ namespace EmployeeManagementSystem.Migrations
             modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeInfo", b =>
                 {
                     b.Navigation("Employeeleave");
-
-                    b.Navigation("EmployeeProject");
-                });
-
-            modelBuilder.Entity("EmployeeManagementSystem.Models.Project", b =>
-                {
-                    b.Navigation("EmployeeProject");
                 });
 #pragma warning restore 612, 618
         }

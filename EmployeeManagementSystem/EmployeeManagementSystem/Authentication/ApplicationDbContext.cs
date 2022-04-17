@@ -24,20 +24,30 @@ namespace EmployeeManagementSystem.Authentication
            .WithMany(e => e.Employeeleave)
            .HasForeignKey(el => el.EmployeeId);
 
+            builder.Entity<EmployeeProject>().HasKey(ep => new { ep.EmployeeId, ep.ProjectId });
+
+            builder.Entity<EmployeeProject>().HasOne(ep => ep.Employeeinfo)
+                .WithMany(ep => ep.EmployeeProject)
+                .HasForeignKey(ep => ep.EmployeeId);
+
+            builder.Entity<EmployeeProject>().HasOne(ep => ep.Project)
+                .WithMany(ep => ep.EmployeeProject)
+                .HasForeignKey(ep => ep.ProjectId);
+
             //builder.Entity<Department>()
             //    .HasOne<EmployeeInfo>(e => e.Employeeinfo)
             //    .WithOne(d => d.Department)
             //   .HasForeignKey<EmployeeInfo>(d => d.DepartmentId);
 
             //builder.Entity<EmployeeInfo>()
-            //    .HasMany<Project>(e => e.Project)
-            //    .WithMany(p => p.Employeeinfo)
-            //    .Map(pe =>
-            //    {
-            //        pe.MapLeftKey("EmployeeInfoRefId");
-            //        pe.MapRightKey("ProjectRefId");
-            //        pe.ToTable("EmpInfoProject");
-            //    });
+            //   .HasMany<Project>(e => e.Project)
+            //   .WithMany(p => p.Employeeinfo)
+            //   .Map(pe =>
+            //   {
+            //       pe.MapLeftKey("employeeinforefid");
+            //       pe.MapRightKey("projectrefid");
+            //       pe.ToTable("empinfoproject");
+            //   });
         }
         public DbSet<EmployeeInfo> EmployeeInfos { get; set; }
         public DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
