@@ -1,1 +1,86 @@
-<p>project works!</p>
+<div class="d-flex"> 
+    <h4 class="container-fluid text-success mt-4 ">Project List</h4>
+    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style=" width: 8%;
+    height: 0%;
+    margin-top: 1%; float: right; margin: 20px; margin-right: 40px; ">
+        Assign Project
+      </button>
+      </div>
+    <table class="table      table-striped container mt-4">
+        <thead class="h6">
+        <tr>
+                <td>Employee FirstName</td>
+                <td>Employee LastName</td>
+                <td>Project Name</td>
+                <td>Due Date</td>
+                <td>Submit date</td>
+                <td>Status</td>
+                <td></td>
+                <td></td>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Rutuja</td>
+                <td>Pawar</td>
+                <td>online shop</td>
+                <td>12jan2020</td>
+                <td>16jun2020</td>
+                <td>satus</td>
+                <td><button>EDIT</button></td>
+                <td><button>DELETE</button></td>
+            </tr>
+            <tr>
+                <td>Pranav</td>
+                <td>taur</td>
+                <td>online jelarry</td>
+                <td>23feb2022</td>
+                <td>16agst2022</td>
+                <td>satus</td>
+                <td><button>EDIT</button></td>
+                <td><button>DELETE</button></td>
+            </tr>
+        <!-- <tr *ngFor="let item of listAllProject">
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
+            <td>{{item.projectName}}</td>
+            <td>{{item.dueDate}}</td>s
+            <td>{{item.sumitDate}}</td>
+            <td>{{item.status}}</td>
+            <td>EDIT</td>
+            <td>DELETE</td>
+         </tr> -->
+         </tbody>
+    </table>>            
+
+    <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Assign Project</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body " style="background-color: rgb(204, 229, 252);">
+              <form  >
+              
+                    <div class="mb-3">
+                    
+                      <input type="text" placeholder="Title" class="form-control" formControlName="title">
+                      <span *ngIf="title && title.invalid && title.touched" style="color: red;">* This field is Requered</span><br>
+                      <input type="text" placeholder="Enter Dare" class="form-control" formControlName="date">
+                      <span *ngIf="date && date.invalid && date.touched" style="color: red;">* This field is Requered</span><br>
+                      <input type="text" placeholder="Discription" class="form-control" formControlName="description">
+                       <span *ngIf="description && description.invalid && description.touched" style="color: red;">* This field is Requered</span><br>
+                       
+                    </div>
+                      
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="closebtn" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+              <button type="button"  class="btn btn-primary" >SUMIT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     -->

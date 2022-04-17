@@ -47,7 +47,8 @@
       <td>{{ item.joiningDate }}</td>
       <td>{{ item.departmentName }}</td>
       <td>
-        <button [routerLink]="['/admin/updateemployee', item.id]">EDIT</button>
+        <button (click)="get_specific_employee()" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop2">EDIT</button>
       </td>
       <td><button (click)="delete_employee(item.id)">DELETE</button></td>
     </tr>
@@ -224,7 +225,7 @@
 </div>
 
 <!-- this for update employee information -->
-<!-- <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -236,7 +237,7 @@
             <table>
                 <div class="mb-3">
                 <tr>
-                    <td><input type="text"  class="form-control" EmployeeForm></td>
+                    <td><input type="text"  class="form-control" formControlName="firstName"></td>
                     <td><input type="text"  class="form-control" formControlName="lastName"></td>
                 </tr>
                 <tr>
@@ -269,7 +270,7 @@
                     <td> <br></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="text"  class="form-control" formControlName="departmentname"></td>
+                    <td colspan="2"><input type="text"  class="form-control" formControlName="departmentName"></td>
                 </tr>
                 
                 </div>
@@ -278,8 +279,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-          <button type="button" class="btn btn-primary" (click)="add_employee()">SUMIT</button>
+          <button type="button" class="btn btn-primary" (click)="update_employee()">SUMIT</button>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>

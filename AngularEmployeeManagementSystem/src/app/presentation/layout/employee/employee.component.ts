@@ -63,39 +63,39 @@ export class EmployeeComponent implements OnInit {
     return this.EmployeeAddForm.get('role')
   }
  //get specific employees values for edit
-//  empaddForm=new FormGroup({
-//   id:new FormControl(''),
-// firstName:new FormControl(''),
-// //supplieraddress:this.fb.group({
-//  lastName:new FormControl(''),
-//  address:new FormControl(''),
-//  emailAddress:new FormControl(''),
-//  dateOfBirth:new FormControl(''),
-//  gender:new FormControl(''),
-//  degree:new FormControl(''),
-//  joiningDate:new FormControl(''),
-//  departmentName:new FormControl('')
+ empaddForm=new FormGroup({
+  id:new FormControl(''),
+firstName:new FormControl(''),
+//supplieraddress:this.fb.group({
+ lastName:new FormControl(''),
+ address:new FormControl(''),
+ emailAddress:new FormControl(''),
+ dateOfBirth:new FormControl(''),
+ gender:new FormControl(''),
+ degree:new FormControl(''),
+ joiningDate:new FormControl(''),
+ departmentName:new FormControl('')
 
-// })
-//  get_specific_employee(){
-//  let Id=this.router.snapshot.params['id'];
-//   this._EmployeeService.getEmployeeById(Id).
-//   subscribe((data)=>{
-//     this.empaddForm=new FormGroup({
-//       id:new FormControl(data['id']),
-//       firstName:new FormControl(data['firstName']),
-//       lastName:new FormControl(data['lastName']),
-//       address:new FormControl(data['address']),
-//       emailAddress:new FormControl(data['emailAddress']),
-//       dateOfBirth:new FormControl(data['dateOfBirth']),
-//        gender:new FormControl(data['gender']),
-//        degree:new FormControl(data['degree']),
-//        joiningDate:new FormControl(data['joiningDate']),
-//        departmentname:new FormControl(data['departmentName'])
+})
+ get_specific_employee(){
+ let Id=this.router.snapshot.params['id'];
+  this._EmployeeService.getEmployeeById(localStorage.getItem("userId")||"").
+  subscribe((data)=>{
+    this.empaddForm=new FormGroup({
+      id:new FormControl(data['id']),
+      firstName:new FormControl(data['firstName']),
+      lastName:new FormControl(data['lastName']),
+      address:new FormControl(data['address']),
+      emailAddress:new FormControl(data['emailAddress']),
+      dateOfBirth:new FormControl(data['dateOfBirth']),
+       gender:new FormControl(data['gender']),
+       degree:new FormControl(data['degree']),
+       joiningDate:new FormControl(data['joiningDate']),
+       departmentName:new FormControl(data['departmentName'])
 
-//     })
-//   })
-// }
+    })
+  })
+ }
   //get all employee 
   ngOnInit(): void {
     this._EmployeeService.getAllEmployees().subscribe
@@ -127,16 +127,16 @@ export class EmployeeComponent implements OnInit {
       });
   }
   // //update employee on button click
-  // update_employee(){
-  //   console.warn(this.empaddForm.value);
-  // debugger
-  // this._EmployeeService.updateEmployeee(this.empaddForm.value).
-  // subscribe(data =>{
-  //   alert("employee update Successfully.")
-  //   //this.route.navigate(['/supplierdetail'])
-  //   console.warn(data);
-  // })
-  // }
+  update_employee(){
+    console.warn(this.empaddForm.value);
+  //debugger
+  this._EmployeeService.updateEmployeee(this.empaddForm.value).
+  subscribe(data =>{
+    alert("employee update Successfully.")
+    console.warn(data);
+    this.get_allemployees();
+  })
+  }
 
   //delete employee on button 
   delete_employee(id:number){
