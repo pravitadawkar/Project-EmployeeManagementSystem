@@ -66,6 +66,8 @@ export class EmpleaveComponent implements OnInit {
     ( data =>
       {
         alert("Employee Added Successfully.");
+        let btn= document.getElementById("closebtn");
+       btn?.click();
         this.get_allempleaves();
         //this.route.navigate([''])
       });

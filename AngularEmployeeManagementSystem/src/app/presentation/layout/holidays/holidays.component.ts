@@ -58,7 +58,7 @@ export class HolidaysComponent implements OnInit {
      this._HolidaysService.postHolidays(this.HolidaysAddForm.value).subscribe
     ( data =>
       {
-        alert("Employee Added Successfully.")
+        alert(" Added Successfully.")
        let btn= document.getElementById("closebtn");
        btn?.click();
         this.get_allholidays();
