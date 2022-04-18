@@ -12,7 +12,7 @@ using EmployeeManagementSystem.Authentication;
 
 namespace EmployeeManagementSystem.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeInfoController : ControllerBase
