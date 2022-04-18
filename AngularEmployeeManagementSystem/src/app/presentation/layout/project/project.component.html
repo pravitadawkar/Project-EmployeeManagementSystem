@@ -9,8 +9,6 @@
     <table class="table      table-striped container mt-4">
         <thead class="h6">
         <tr>
-                <td>Employee FirstName</td>
-                <td>Employee LastName</td>
                 <td>Project Name</td>
                 <td>Due Date</td>
                 <td>Submit date</td>
@@ -20,40 +18,19 @@
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Rutuja</td>
-                <td>Pawar</td>
-                <td>online shop</td>
-                <td>12jan2020</td>
-                <td>16jun2020</td>
-                <td>satus</td>
-                <td><button>EDIT</button></td>
-                <td><button>DELETE</button></td>
-            </tr>
-            <tr>
-                <td>Pranav</td>
-                <td>taur</td>
-                <td>online jelarry</td>
-                <td>23feb2022</td>
-                <td>16agst2022</td>
-                <td>satus</td>
-                <td><button>EDIT</button></td>
-                <td><button>DELETE</button></td>
-            </tr>
-        <!-- <tr *ngFor="let item of listAllProject">
-            <td>{{item.firstName}}</td>
-            <td>{{item.lastName}}</td>
+            
+        <tr *ngFor="let item of listAllProjects">
             <td>{{item.projectName}}</td>
             <td>{{item.dueDate}}</td>s
-            <td>{{item.sumitDate}}</td>
+            <td>{{item.submitDate}}</td>
             <td>{{item.status}}</td>
             <td>EDIT</td>
             <td>DELETE</td>
-         </tr> -->
+         </tr>
          </tbody>
     </table>>            
 
-    <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
@@ -61,16 +38,18 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body " style="background-color: rgb(204, 229, 252);">
-              <form  >
+              <form [formGroup]=" ProjectAddForm " >
               
                     <div class="mb-3">
                     
-                      <input type="text" placeholder="Title" class="form-control" formControlName="title">
-                      <span *ngIf="title && title.invalid && title.touched" style="color: red;">* This field is Requered</span><br>
-                      <input type="text" placeholder="Enter Dare" class="form-control" formControlName="date">
-                      <span *ngIf="date && date.invalid && date.touched" style="color: red;">* This field is Requered</span><br>
-                      <input type="text" placeholder="Discription" class="form-control" formControlName="description">
-                       <span *ngIf="description && description.invalid && description.touched" style="color: red;">* This field is Requered</span><br>
+                      <input type="text" placeholder="Projectname" class="form-control" formControlName="projectName">
+                      <span *ngIf="projectName && projectName.invalid && projectName.touched" style="color: red;">* This field is Requered</span><br>
+                      <input type="date" placeholder="Due date" class="form-control" formControlName="dueDate">
+                      <span *ngIf="dueDate && dueDate.invalid && dueDate.touched" style="color: red;">* This field is Requered</span><br>
+                      <input type="date" placeholder="SubmitDate" class="form-control" formControlName="submitDate">
+                       <span *ngIf="submitDate && submitDate.invalid && submitDate.touched" style="color: red;">* This field is Requered</span><br>
+                       <input type="text" placeholder="staus" class="form-control" formControlName="status">
+                       <span *ngIf="status && status.invalid && status.touched" style="color: red;">* This field is Requered</span><br>
                        
                     </div>
                       
@@ -83,4 +62,4 @@
           </div>
         </div>
       </div>
-     -->
+    

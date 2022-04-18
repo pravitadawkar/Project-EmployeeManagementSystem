@@ -54,7 +54,7 @@ export class NoticeComponent implements OnInit {
       });
   
   }
-  //add employee on button
+  //add notice on button
   AddEmployee!:Notice;
   add_notice(){
      console.warn(this.NoticeAddForm.value);
@@ -68,7 +68,7 @@ export class NoticeComponent implements OnInit {
         //this.route.navigate([''])
       });
   }
-  //delete employee on button 
+  //delete notice on button 
   delete_notice(id:number){
     this._NoticeService.deleteNotice(id).subscribe
     (data =>{

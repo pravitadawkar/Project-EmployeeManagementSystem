@@ -51,6 +51,7 @@ namespace EmployeeManagementSystem
             services.AddTransient<INotice, NoticeService>();
             services.AddTransient<IHolidays, HolidaysService>();
             services.AddTransient<IEmployeeProject, EmployeeProjectService>();
+            services.AddTransient<IProject, ProjectService>();
 
             //services.AddTransient<IDepartment, DepartmentService>();
             services.AddControllers();

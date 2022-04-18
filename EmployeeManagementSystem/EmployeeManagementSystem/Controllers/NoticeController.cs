@@ -1,11 +1,13 @@
 ﻿using EmployeeManagementSystem.Interfaces;
 using EmployeeManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace EmployeeManagementSystem.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NoticeController : ControllerBase

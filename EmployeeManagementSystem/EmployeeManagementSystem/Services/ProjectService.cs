@@ -50,10 +50,10 @@ namespace EmployeeManagementSystem.Services
             project1.DueDate = project.DueDate;
             project1.SubmitDate = project.SubmitDate;
             project1.Status = project.Status;
-            _context.Add(project);
+            _context.Add(project1);
             _context.SaveChanges();
         }
-        public void update(ProjectDTO project)
+        public void Update(ProjectDTO project)
         {
             Project project1 = new Project();
             project1.Id = project.ProjectId;
@@ -61,10 +61,10 @@ namespace EmployeeManagementSystem.Services
             project1.DueDate = project.DueDate;
             project1.SubmitDate = project.SubmitDate;
             project1.Status = project.Status;
-            _context.Update(project);
+            _context.Update(project1);
             _context.SaveChanges();
         }
-        public void delete(int id)
+        public void Delete(int id)
         {
             var project = _context.Projects.Where(e => e.Id == id).FirstOrDefault();
 
@@ -73,16 +73,6 @@ namespace EmployeeManagementSystem.Services
                 _context.Remove(project);
                 _context.SaveChanges();
             }
-        }
-
-        public void Update(ProjectDTO project)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
